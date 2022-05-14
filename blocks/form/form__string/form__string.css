@@ -1,9 +1,10 @@
 .form__string {
     border: none;
-    border-bottom: 1px solid rgba(0, 0, 0, .2); 
-    max-width: 238px;
-    margin: 0 22px;
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
+    margin: 0;
     padding-bottom: 13px;
+    display: flex;
+    flex-direction: column;
 }
 
 .form__string::placeholder {

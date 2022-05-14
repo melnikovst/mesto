@@ -15,6 +15,7 @@
 
 .popup__button-escape:hover {
     opacity: 0.5;
+    cursor: pointer;
 }
 
 @media screen and (min-width: 550px) {
