@@ -2,5 +2,5 @@
     display: flex;
     margin: 0 16px 0 21px;
     justify-content: space-between;
-    /* overflow: hidden; */
+    align-items: center;
 }

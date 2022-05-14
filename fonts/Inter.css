@@ -1,0 +1,47 @@
+@font-face {
+    font-family: 'Inter';
+    src: local('Inter-Black'),
+        local('Inter-Black'),
+        url(./Inter-Black.woff) format('woff'),
+        url(./Inter-Black.woff2) format('woff2');
+        font-weight: 900;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: local('Inter-Regular'),
+        local('Inter-Regular'), 
+        url(./Inter-Regular.woff) format('woff'),
+        url(./Inter-Regular.woff2) format('woff2');
+        font-weight: 400;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: local('Inter-Bold'),
+        local('Inter-Bold'),
+        url(./Inter-Bold.woff) format('woff'),
+        url(./Inter-Bold.woff2) format('woff2');
+        font-weight: 700;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+}
+
+
+
