@@ -9,5 +9,5 @@
  * _Работа свойств проверена в браузерах Firefox, Yandex, Chrome._
 3. **Java Script**
  * _Реализовано открытие-закрытие всплывающего окна._
-[https://melnikovst.github.io/mesto/](https://melnikovst.github.io/mesto/ "Ссылка на GH page")
+ [https://melnikovst.github.io/mesto/](https://melnikovst.github.io/mesto/ "Ссылка на GH page")
 ### Спасибо за просмотр данной работы.
