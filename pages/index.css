@@ -33,9 +33,8 @@
 @import url(../blocks/card/__image/card__image.css);
 @import url(../blocks/card/__title-wrapper/card__title-wrapper.css);
 @import url(../blocks/card/__title/card__title.css);
-@import url(../blocks/card/__vector/card__vector.css);
 @import url(../blocks/card/__button/card__button.css);
-@import url(../blocks/card/__button/__active/card__button_active.css);
+@import url(../blocks/card/__button/_active/card__button_active.css);
 
 /* HEADER */
 
@@ -46,15 +45,15 @@
 
 
 @import url(../blocks/popup/popup.css);
-@import url(../blocks/popup/__opened/popup__opened.css);
+@import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/__button-escape/popup__button-escape.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__form-container/popup__form-container.css);
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__title/popup__title.css);
-@import url(../blocks/popup/popup__button/popup__button.css);
+@import url(../blocks/popup/__button/popup__button.css);
 
 /* FORM */
 
 @import url(../blocks/form/form.css);
-@import url(../blocks/form/form__string/form__string.css);
+@import url(../blocks/form/__string/form__string.css);

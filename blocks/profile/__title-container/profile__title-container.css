@@ -1,6 +1,6 @@
 .profile__title-container {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     position: relative;
     margin: 22.25px auto 14px auto;
 }

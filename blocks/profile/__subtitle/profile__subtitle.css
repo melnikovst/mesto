@@ -10,7 +10,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 282px;
-    /* white-space: nowrap; */
+    white-space: nowrap; 
     max-height: fit-content;
 }
 
