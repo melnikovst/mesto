@@ -1,4 +1,4 @@
-.popup__button {
+.form__button {
     font-family: 'Inter', Arial, Helvetica, sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -16,13 +16,13 @@
     border: none;
 }
 
-.popup__button:hover {
+.form__button:hover {
     opacity: 0.8;
     cursor: pointer;
 }
 
 @media screen and (min-width: 470px) {
-    .popup__button {
+    .form__button {
         width: calc(100% - 72px);
         margin-bottom: 37px;
     }

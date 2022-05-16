@@ -9,11 +9,13 @@
     justify-content: center;
     align-items: center;
     transition: all 0.1s ease;
-    margin-bottom: 4px;
+    /* Не стал прижимать кнопку к нижней оси, наставник сказал, что лучшее решение - 
+    выровнять с небольшим расхождением с макетом.
+    */
 }
 
 .profile__title-button:hover {
-    opacity: 0.5;
+    opacity: 0.6;
     cursor: pointer;
 }
 
@@ -21,6 +23,5 @@
     .profile__title-button {
         width: 24px;
         height: 24px;
-        margin-bottom: 7px;
     }
 }

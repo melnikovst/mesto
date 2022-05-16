@@ -21,5 +21,6 @@
         max-width: 480px;
         text-align: start;
         white-space: nowrap;
+        margin-right: 18px;
     }
 }
