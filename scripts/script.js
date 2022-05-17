@@ -2,8 +2,8 @@ let popupOpened = document.querySelector('.profile__title-button');
 let popup = document.querySelector('.popup');
 let popupClosed = document.querySelector('.popup__button-escape');
 let formElement = document.querySelector('.form');
-let nameInput = document.querySelector('#form__name');
-let jobInput = document.querySelector('#form__job');
+let nameInput = document.querySelector('.form__input_type_name');
+let jobInput = document.querySelector('.form__input_type_job');
 let job = document.querySelector('.profile__subtitle');
 let author = document.querySelector('.profile__title');
 
@@ -12,6 +12,8 @@ function open () {
     nameInput.value = author.textContent;
     jobInput.value = job.textContent; 
 };
+
+console.log(popup);
 
 function close () {
     popup.classList.remove('popup_opened');

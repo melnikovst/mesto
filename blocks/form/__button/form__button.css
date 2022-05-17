@@ -25,5 +25,7 @@
     .form__button {
         width: calc(100% - 72px);
         margin-bottom: 37px;
+        font-size: 18px;
+        line-height: 22px;
     }
 }
