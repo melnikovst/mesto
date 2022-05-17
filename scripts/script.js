@@ -13,8 +13,6 @@ function open () {
     jobInput.value = job.textContent; 
 };
 
-console.log(popup);
-
 function close () {
     popup.classList.remove('popup_opened');
 };
