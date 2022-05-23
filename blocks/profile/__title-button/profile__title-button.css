@@ -12,6 +12,7 @@
     выровнять с небольшим расхождением с макетом.
     */
     flex-grow: 0;
+    flex-shrink: 0;
 }
 
 .profile__title-button:hover {
