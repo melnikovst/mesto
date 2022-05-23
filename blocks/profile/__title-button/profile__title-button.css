@@ -11,8 +11,7 @@
     /* Не стал прижимать кнопку к нижней оси, наставник сказал, что лучшее решение - 
     выровнять с небольшим расхождением с макетом.
     */
-    flex-grow: 1;
-    flex-shrink: 0;
+    -webkit-box-sizing: border-box;
 }
 
 .profile__title-button:hover {
