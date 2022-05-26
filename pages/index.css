@@ -53,7 +53,7 @@
 @import url(../blocks/popup/__image-item/popup__image-item.css);
 @import url(../blocks/popup/__image/popup__image.css);
 @import url(../blocks/popup/__image-subtitle/popup__image-subtitle.css);
-@import url(../blocks/popup/_image_edit/popup_image_edit.css);
+@import url(../blocks/popup/__image_edit/popup__image_edit.css);
 
 /* FORM */
 

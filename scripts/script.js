@@ -59,6 +59,10 @@ function editCard(el) {
   imgPopup();
 }
 
+initialCards.forEach(function (el) {
+  return editCard(el);
+});
+
 function editCardSubmitHandler(evt) {
   evt.preventDefault();
   const cardItem = cardTemplate.content;
@@ -73,10 +77,6 @@ function editCardSubmitHandler(evt) {
   cardPopupClosing();
   imgPopup();
 }
-
-initialCards.forEach(function (el) {
-  return editCard(el);
-});
 
 function imagePopup() {
   bigImgPopup.classList.add('popup_opened');
