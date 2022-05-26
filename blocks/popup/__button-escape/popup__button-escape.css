@@ -11,6 +11,7 @@
     position: absolute;
     border: none;
     transition: all 0.1s ease;
+    z-index: 2;
 }
 
 .popup__button-escape:hover {

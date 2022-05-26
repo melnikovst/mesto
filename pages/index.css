@@ -35,6 +35,7 @@
 @import url(../blocks/card/__title/card__title.css);
 @import url(../blocks/card/__button/card__button.css);
 @import url(../blocks/card/__button/_active/card__button_active.css);
+@import url(../blocks/card/__delete-button/card__delete-button.css);
 
 /* HEADER */
 
@@ -49,6 +50,10 @@
 @import url(../blocks/popup/__button-escape/popup__button-escape.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__title/popup__title.css);
+@import url(../blocks/popup/__image-item/popup__image-item.css);
+@import url(../blocks/popup/__image/popup__image.css);
+@import url(../blocks/popup/__image-subtitle/popup__image-subtitle.css);
+@import url(../blocks/popup/_image_edit/popup_image_edit.css);
 
 /* FORM */
 
