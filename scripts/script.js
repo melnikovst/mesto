@@ -155,4 +155,3 @@ popupOpened.addEventListener('click', open);
 popupClosed.addEventListener('click', close);
 formElement.addEventListener('submit', formSubmitHandler);
 cardForm.addEventListener('submit', editCardSubmitHandler);
-
