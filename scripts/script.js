@@ -17,7 +17,7 @@ const cardEditorInputLink = document.querySelector('.form__input_type-link');
 const cardForm = document.querySelector('.form_popup_template');
 const bigImg = document.querySelector('.popup__image-item');
 const bigImgPopup = document.querySelector('.popup_image_edit');
-const bigImgPopupClosing = document.querySelector('.popup__image_button-escape');
+const bigImgPopupClosing = document.querySelector('.popup_image_button-escape');
 
 const initialCards = [
   {
