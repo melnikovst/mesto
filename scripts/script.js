@@ -12,12 +12,12 @@ const cardTemplateContainer = document.querySelector('.cards');
 const cardEditor = document.querySelector('.popup_template_edit');
 const cardPopupBtn = document.querySelector('.profile__button');
 const cardClosingBtn = document.querySelector('.popup__template-closing');
-const cardEditorInputName = document.querySelector('.form_popup_template_input_type_name');
-const cardEditorInputLink = document.querySelector('.form_popup_template_input_type_link');
+const cardEditorInputName = document.querySelector('.form__input_type-name');
+const cardEditorInputLink = document.querySelector('.form__input_type-link');
 const cardForm = document.querySelector('.form_popup_template');
 const bigImg = document.querySelector('.popup__image-item');
 const bigImgPopup = document.querySelector('.popup_image_edit');
-const bigImgPopupClosing = document.querySelector('.popup_image_close_button');
+const bigImgPopupClosing = document.querySelector('.popup__image_button-escape');
 
 const initialCards = [
   {
