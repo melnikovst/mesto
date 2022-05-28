@@ -53,7 +53,6 @@ function editCardSubmitHandler(evt) {
     link: cardEditorInputLink.value,
     name: cardEditorInputName.value
   };
-  editCard(card);
   renderCards(card);
   cardForm.reset();
   closePopup(cardEditor);
