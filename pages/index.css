@@ -61,3 +61,7 @@
 @import url(../blocks/form/__fieldset/form__fieldset.css);
 @import url(../blocks/form/__input/form__input.css);
 @import url(../blocks/form/__button/form__button.css);
+@import url(../blocks/form/__input/_invalid/form__input_invalid.css);
+@import url(../blocks/form/__invalid-message/form__invalid-message.css);
+@import url(../blocks/form/__invalid-message/_active/form__invalid-message_active.css);
+@import url(../blocks/form/__button/_disabled/form__button_disabled.css);

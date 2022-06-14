@@ -5,19 +5,4 @@
     width: 100%;
 }
 
-.form__invalid-message {
-    margin: 5px 0 0 0;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 15px;
-    color: #FF0000;
-    opacity: 0;
-    min-height: 30px;
-    transition: all linear .3s;
-}
 
-.form__invalid-message_active {
-    opacity: 1;
-}
