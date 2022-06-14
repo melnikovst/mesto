@@ -56,11 +56,11 @@
             <div class="popup__container">
                 <button type="button" aria-label="Закрыть всплывающее окно" class="popup__button-escape"></button>
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <form novalidate name="form" class="form">
+                <form novalidate name="form" class="form profile_values_form">
                     <fieldset class="form__fieldset">
                         <input type="text" class="form__input form__input_type_name" name="form-name" required
                             minlength="2" maxlength="40" placeholder="Ваше имя" id="name-input">
-                        <span class="form__invalid-message name-input-error"></span>
+                        <span class="form__invalid-message name-input-error">2222</span>
                         <input type="text" class="form__input form__input_type_job" name="form-job"
                             placeholder="Ваш род деятельности" minlength="2" maxlength="200" id="job-input" required>
                         <span class="form__invalid-message job-input-error"></span>
@@ -84,7 +84,7 @@
                             placeholder="Ссылка на картинку" required>
                         <span class="form__invalid-message link-input-error"></span>
                     </fieldset>
-                    <button type="submit" aria-label="Создать" class="form__button">Создать</button>
+                    <button type="submit" id="card-button" aria-label="Создать" class="form__button">Создать</button>
                 </form>
             </div>
         </div>
@@ -98,9 +98,9 @@
         </div>
 
     </div>
-    <script src="./scripts/cards.js"></script> <!-- вынес массив с карточками в отдельный скрипт-->
+    <script src="./scripts/variables.js"></script> <!-- вынес массив с карточками в отдельный скрипт-->
     <script src="./scripts/script.js"></script>
-    <!-- <script src="./scripts/validate.js"></script> -->
+    <script src="./scripts/validate.js"></script>
 </body>
 
 </html>

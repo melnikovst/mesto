@@ -10,8 +10,8 @@
     width: calc(100% - 44px);
     min-height: 46px;
     border-radius: 2px;
-    margin-bottom: 25px;
-    margin-top: 31px;
+    margin-bottom: 30px;
+    margin-top: 20px;
     transition: all 0.1s ease;
     border: none;
 }
@@ -21,29 +21,20 @@
     cursor: pointer;
 }
 
-.form__button:disabled {
+.form__button_disabled {
     box-sizing: border-box;
     border: 1px solid #000000;
     border-radius: 2px;
     background-color: #E5E5E5;
     opacity: 0.2;
     color: #000;
+    pointer-events: none;
 }
 
 @media screen and (min-width: 470px) {
     .form__button {
         width: calc(100% - 72px);
-        margin-bottom: 37px;
         font-size: 18px;
         line-height: 22px;
     }
-}
-
-.form__button_disabled {
-    opacity: 0.2;
-    color: #000;
-    border: 1px solid #000000;
-    border-radius: 2px;
-    background-color: #E5E5E5;
-    box-sizing: border-box;
 }
