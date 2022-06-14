@@ -3,7 +3,7 @@
     flex-direction: column;
     border: none;
     padding: 0;
-    row-gap: 30px;
+    /* row-gap: 30px; */
     margin: 0;
     width: calc(100% - 44px);
 }
