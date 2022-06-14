@@ -13,6 +13,6 @@
     color: #000;
 }
 
-.form__input:invalid {
-    border-bottom: border-bottom: 1px solid red;
+.form__input_type_error {
+    border-bottom: 1px solid red;
 }
