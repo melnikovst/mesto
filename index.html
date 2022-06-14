@@ -58,10 +58,12 @@
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <form name="form" class="form">
                     <fieldset class="form__fieldset">
-                        <input type="text" class="form__input form__input_type_name" name="form-name"
+                        <input type="text" class="form__input form__input_type_name" name="form-name" id="input-name"
                             placeholder="Ваше имя"> <!-- Классы со сложными модификаторами для JS -->
-                        <input type="text" class="form__input form__input_type_job" name="form-job"
+                            <span class="form__error-message"></span>
+                        <input type="text" class="form__input form__input_type_job" name="form-job" id="input-job"
                             placeholder="Ваш род деятельности" value="">
+                            <span class="form__error-message"></span>
                     </fieldset>
                     <button type="submit" aria-label="Сохранить" class="form__button">Сохранить</button>
                 </form>
@@ -75,10 +77,12 @@
                 <h2 class="popup__title">Новое место</h2>
                 <form name="form" class="form form_popup_template">
                     <fieldset class="form__fieldset">
-                        <input type="text" class="form__input form__input_type-name" name="form-name"
+                        <input required type="text" class="form__input form__input_type-name" name="form-title" id="input-title"
                             placeholder="Название">
-                        <input type="text" class="form__input form__input_type-link" name="form-job"
+                            <span class="form__error-message"></span>
+                        <input required type="text" class="form__input form__input_type-link" name="form-link" id="input-link"
                             placeholder="Ссылка на картинку" value="">
+                            <span id="input-link-error" class="form__error-message"></span>
                     </fieldset>
                     <button type="submit" aria-label="Создать" class="form__button">Создать</button>
                 </form>

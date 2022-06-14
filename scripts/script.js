@@ -21,6 +21,17 @@ const bigImgPopupClosing = document.querySelector('.popup__button-escape_image')
 const cardImage = document.querySelector('.popup__image-item');
 const cardTitle = document.querySelector('.popup__image-subtitle');
 
+const settings = {
+  formSelector: '.form',
+  inputSelector: '.form__input',
+  submitButtonSelector: '.form__button',
+  inactiveButtonClass: 'form__button_inactive',
+  inputErrorClass: 'form__input_type_error',
+  errorClass: 'form__input-error_active'
+}
+
+
+
 function editCard(el) {
   const cardItem = cardTemplate.content;
   const cardElement = cardItem.querySelector('.card').cloneNode(true);
@@ -65,6 +76,18 @@ function openPopup(item) {
 function closePopup(item) {
   item.classList.remove('popup_opened');
 }
+
+const closePopupByEsc = (evt) => {
+  const popupOpenedState = document.querySelector('.popup_opened');
+  if (evt.key === 'Escape') {
+    popupOpenedState.classList.remove('popup_opened');
+  }
+}
+
+document.addEventListener('keyup', (evt) => {
+  closePopupByEsc(evt);
+}); 
+
 
 function bigImage(el) {
   cardImage.src = el.link;

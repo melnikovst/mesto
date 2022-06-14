@@ -4,3 +4,15 @@
     align-items: center;
     width: 100%;
 }
+
+.form__error-message {
+    border: 1px solid red;
+    min-height: 30px;
+    opacity: 0;
+    transition: all .3s linear;
+}
+
+.form__error-message_visible {
+    opacity: 1;
+}
+
