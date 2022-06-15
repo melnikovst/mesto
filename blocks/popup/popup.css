@@ -7,9 +7,9 @@
     left: 0;
     z-index: 2;
     width: 100%;
+    visibility: hidden;
     justify-content: center;
     align-items: center;
     opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s linear, visibility 0.3s;
+    transition: visibility 0.3s, opacity 0.3s linear;
 } 

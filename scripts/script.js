@@ -63,7 +63,7 @@ const renderInputs = () => {
 const handleProfileFormSubmit = () => {
   author.textContent = nameInput.value;
   job.textContent = jobInput.value;
-  closePopup(popup);
+  closePopup(popupProfile);
 };
 
 const closeByEscape = (evt) => {
@@ -73,26 +73,31 @@ const closeByEscape = (evt) => {
   }
 }
 
-popupsList.forEach(popup => popup.addEventListener('mousedown', (evt) => {
-  if (evt.target.classList.contains('popup_close')) {
-    document.removeEventListener('keyup', closeByEscape);
-    closePopup(popup);
-  }
-}));
-console.log(popupsList);
-
-cardPopupBtn.addEventListener('click', () => {
+const setCardListener = () => {
   removeErrorsOpenedPopups(cardEditor);
   openPopup(cardEditor);
   cardForm.reset();
   disableButton(cardButton, settings);
-});
+}
 
-buttonOpenPopupProfileEdit.addEventListener('click', () => {
+const setProfileListener = () => {
   removeErrorsOpenedPopups(popupProfile);
   openPopup(popupProfile);
   renderInputs();
-});
+}
+
+const closePopupByClick = (evt) => {
+  if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('popup_close')) {
+    const popup = evt.target.closest('.popup_opened');
+    closePopup(popup);
+  }
+};
+
+popupsList.forEach(popup => popup.addEventListener('mousedown', closePopupByClick));
+
+cardPopupBtn.addEventListener('click', setCardListener);
+
+buttonOpenPopupProfileEdit.addEventListener('click', setProfileListener);
 
 profileForm.addEventListener('submit', handleProfileFormSubmit);
 cardForm.addEventListener('submit', editCardSubmitHandler);

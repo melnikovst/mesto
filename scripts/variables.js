@@ -17,7 +17,7 @@ const bigImgPopup = document.querySelector('.popup_type_picture');
 const cardImage = document.querySelector('.popup__image-item');
 const cardTitle = document.querySelector('.popup__image-subtitle');
 const cardButton = document.querySelector('#card-button');
-const popupsList = Array.from(document.querySelectorAll('.popup'));
+const popupsList = document.querySelectorAll('.popup');
 
 const settings = {
   formSelector: '.form',
