@@ -3,4 +3,9 @@
     height: 282px;
     object-fit: cover;
     object-position: center;
+    transition: transform .2s linear;
+}
+
+.card__image:hover {
+    transform: scale(1.05);
 }
