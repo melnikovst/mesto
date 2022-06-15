@@ -30,12 +30,12 @@ const createCard = (el) => {
     openPopupImage(el);
   });
   return cardElement;
-}
+};
 
 const renderCard = (el) => {
   const cardElement = createCard(el)
   cardTemplateContainer.prepend(cardElement);
-}
+};
 
 initialCards.forEach(cardElement => renderCard(cardElement));
 
@@ -47,18 +47,18 @@ const editCardSubmitHandler = () => {
   renderCard(card);
   cardForm.reset();
   closePopup(cardEditor);
-}
+};
 
 const openPopupImage = (el) => {
   cardImage.src = el.link;
   cardTitle.textContent = el.name;
   cardImage.alt = el.name;
-}
+};
 
 const renderInputs = () => {
   nameInput.value = author.textContent;
   jobInput.value = job.textContent;
-}
+};
 
 const handleProfileFormSubmit = () => {
   author.textContent = nameInput.value;
@@ -71,27 +71,34 @@ const closeByEscape = (evt) => {
     const popupOpenedState = document.querySelector('.popup_opened');
     closePopup(popupOpenedState);
   }
-}
+};
 
 const setCardListener = () => {
   removeErrorsOpenedPopups(cardEditor);
   openPopup(cardEditor);
   cardForm.reset();
   disableButton(cardButton, settings);
-}
+};
 
 const setProfileListener = () => {
   removeErrorsOpenedPopups(popupProfile);
   openPopup(popupProfile);
   renderInputs();
-}
+};
 
 const closePopupByClick = (evt) => {
-  if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('popup_close')) {
+  if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('popup__button-escape')) {
     const popup = evt.target.closest('.popup_opened');
     closePopup(popup);
   }
 };
+
+// выключаю "мелькания" скрытых поп-апов при загрузке страницы
+const preloadAnimationCanceling = () => {
+  popupsList.forEach(popup => popup.classList.add('popup_animated'));
+};
+
+window.addEventListener('DOMContentLoaded', preloadAnimationCanceling);
 
 popupsList.forEach(popup => popup.addEventListener('mousedown', closePopupByClick));
 
