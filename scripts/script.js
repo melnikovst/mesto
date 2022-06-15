@@ -5,6 +5,7 @@ const openPopup = (item) => {
 
 const closePopup = (item) => {
   item.classList.remove('popup_opened');
+  document.removeEventListener('keyup', closeByEscape);
 }
 
 const likeBtn = (evt) => {
@@ -15,7 +16,7 @@ const deleteCard = (evt) => {
   evt.target.closest('.card').remove();
 }
 
-const editCard = (el) => {
+const createCard = (el) => {
   const cardItem = cardTemplate.content;
   const cardElement = cardItem.querySelector('.card').cloneNode(true);
   const cardImage = cardElement.querySelector('.card__image');
@@ -26,32 +27,32 @@ const editCard = (el) => {
   cardElement.querySelector('.card__delete-button').addEventListener('click', deleteCard);
   cardImage.addEventListener('click', () => {
     openPopup(bigImgPopup);
-    bigImage(el);
+    openPopupImage(el);
   });
-  closePopup(bigImgPopup);
   return cardElement;
 }
 
-const renderCards = (el) => {
-  const cardElement = editCard(el)
+const renderCard = (el) => {
+  const cardElement = createCard(el)
   cardTemplateContainer.prepend(cardElement);
 }
 
-initialCards.forEach(cardElement => renderCards(cardElement));
+initialCards.forEach(cardElement => renderCard(cardElement));
 
 const editCardSubmitHandler = () => {
   const card = {
     link: cardEditorInputLink.value,
     name: cardEditorInputName.value
   };
-  renderCards(card);
+  renderCard(card);
   cardForm.reset();
   closePopup(cardEditor);
 }
 
-const bigImage = (el) => {
+const openPopupImage = (el) => {
   cardImage.src = el.link;
   cardTitle.textContent = el.name;
+  cardImage.alt = el.name;
 }
 
 const renderInputs = () => {
@@ -59,43 +60,26 @@ const renderInputs = () => {
   jobInput.value = job.textContent;
 }
 
-const formSubmitHandler = () => {
+const handleProfileFormSubmit = () => {
   author.textContent = nameInput.value;
   job.textContent = jobInput.value;
   closePopup(popup);
 };
 
 const closeByEscape = (evt) => {
-  const popupOpenedState = document.querySelector('.popup_opened');
   if (evt.key === 'Escape') {
-    popupOpenedState.classList.remove('popup_opened');
+    const popupOpenedState = document.querySelector('.popup_opened');
+    closePopup(popupOpenedState);
   }
-  document.removeEventListener('keyup', closeByEscape);
 }
 
-const closePopupByClick = (evt, item) => {
-  if ((evt.target.classList.contains('popup__button-escape')) || (evt.target.classList.contains('popup'))) {
-    closePopup(item);
+popupsList.forEach(popup => popup.addEventListener('mousedown', (evt) => {
+  if (evt.target.classList.contains('popup_close')) {
+    document.removeEventListener('keyup', closeByEscape);
+    closePopup(popup);
   }
-};
-
-document.addEventListener('mousedown', (evt) => {
-  const buttonsCondition = evt.target.classList.contains('popup__button-escape');
-  const conditions = {
-    conditionProfile: (evt.target.classList.contains('popup_type_profile-info') || buttonsCondition),
-    conditionAddCard: (evt.target.classList.contains('popup_type_card-add') || buttonsCondition),
-    conditionImagePreview: (evt.target.classList.contains('popup_type_picture') || buttonsCondition)
-  };
-  if (conditions.conditionProfile) {
-    closePopupByClick(evt, popup);
-  }
-  if (conditions.conditionAddCard) {
-    closePopupByClick(evt, cardEditor);
-  }
-  if (conditions.conditionImagePreview) {
-    closePopupByClick(evt, bigImgPopup);
-  }
-});
+}));
+console.log(popupsList);
 
 cardPopupBtn.addEventListener('click', () => {
   removeErrorsOpenedPopups(cardEditor);
@@ -104,11 +88,11 @@ cardPopupBtn.addEventListener('click', () => {
   disableButton(cardButton, settings);
 });
 
-popupOpened.addEventListener('click', () => {
-  removeErrorsOpenedPopups(popup);
-  openPopup(popup);
+buttonOpenPopupProfileEdit.addEventListener('click', () => {
+  removeErrorsOpenedPopups(popupProfile);
+  openPopup(popupProfile);
   renderInputs();
 });
 
-profileForm.addEventListener('submit', formSubmitHandler);
+profileForm.addEventListener('submit', handleProfileFormSubmit);
 cardForm.addEventListener('submit', editCardSubmitHandler);
