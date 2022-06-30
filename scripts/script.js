@@ -1,4 +1,27 @@
-const openPopup = (item) => {
+import { nameInput, author, job, jobInput, initialCards, buttonOpenPopupProfileEdit, popupProfile, cardTemplateContainer, cardEditor, cardPopupBtn, cardEditorInputName, cardEditorInputLink, cardForm, profileForm, cardButton, popupsList, profileBtn, formsList, settings } from "./variables.js";
+import { FormValidator } from "./FormValidator.js";
+import { Card } from "./Card.js";
+
+const hideError = (form, error, input, settings) => {
+  input.classList.remove(settings.inputErrorClass);
+  error.textContent = '';
+  error.classList.remove(settings.errorClass);
+};
+
+const removeErrorsOpenedPopups = (form) => {
+  const inputs = Array.from(form.querySelectorAll(settings.inputSelector));
+  inputs.forEach(input => {
+    const error = form.querySelector(`.${input.id}-error`);
+    hideError(form, error, input, settings);
+  });
+};
+
+const disableButton = (button, settings) => {
+  button.classList.add(settings.inactiveButtonClass);
+  button.disabled = true;
+};
+
+export const openPopup = (item) => {
   item.classList.add('popup_opened');
   document.addEventListener('keyup', closeByEscape);
 }
@@ -8,36 +31,15 @@ const closePopup = (item) => {
   document.removeEventListener('keyup', closeByEscape);
 }
 
-const likeBtn = (evt) => {
-  evt.target.classList.toggle('card__button_active');
-}
-
-const deleteCard = (evt) => {
-  evt.target.closest('.card').remove();
-}
-
-const createCard = (el) => {
-  const cardItem = cardTemplate.content;
-  const cardElement = cardItem.querySelector('.card').cloneNode(true);
-  const cardImage = cardElement.querySelector('.card__image');
-  cardImage.src = el.link;
-  cardImage.alt = el.name;
-  cardElement.querySelector('.card__title').textContent = el.name;
-  cardElement.querySelector('.card__button').addEventListener('click', likeBtn);
-  cardElement.querySelector('.card__delete-button').addEventListener('click', deleteCard);
-  cardImage.addEventListener('click', () => {
-    openPopup(bigImgPopup);
-    openPopupImage(el);
-  });
-  return cardElement;
+const renderCard = (cardElement) => {
+  const card = new Card(cardElement);
+  const cardItem = card.generateCard();
+  cardTemplateContainer.prepend(cardItem);
 };
 
-const renderCard = (el) => {
-  const cardElement = createCard(el)
-  cardTemplateContainer.prepend(cardElement);
-};
-
-initialCards.forEach(cardElement => renderCard(cardElement));
+initialCards.forEach(cardElement => {
+  renderCard(cardElement);
+});
 
 const editCardSubmitHandler = () => {
   const card = {
@@ -47,12 +49,6 @@ const editCardSubmitHandler = () => {
   renderCard(card);
   cardForm.reset();
   closePopup(cardEditor);
-};
-
-const openPopupImage = (el) => {
-  cardImage.src = el.link;
-  cardTitle.textContent = el.name;
-  cardImage.alt = el.name;
 };
 
 const renderInputs = () => {
@@ -84,6 +80,7 @@ const setProfileListener = () => {
   removeErrorsOpenedPopups(popupProfile);
   openPopup(popupProfile);
   renderInputs();
+  disableButton(profileBtn, settings);
 };
 
 const closePopupByClick = (evt) => {
@@ -92,6 +89,12 @@ const closePopupByClick = (evt) => {
     closePopup(popup);
   }
 };
+
+formsList.forEach(form => {
+  const item = new FormValidator(settings, form);
+  item.enableValidation();
+});
+
 
 // выключаю "мелькания" скрытых поп-апов при загрузке страницы
 const preloadAnimationCanceling = () => {
