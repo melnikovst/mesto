@@ -1,7 +1,8 @@
-import { settings } from "./variables.js";
+/* import { settings } from "./variables.js"; */
 
 export class FormValidator {
     constructor(settings, form) {
+        this._settings = settings;
         this._form = form;
         this._inputSelector = settings.inputSelector;
         this._errorClass = settings.errorClass;
@@ -11,9 +12,6 @@ export class FormValidator {
     }
 
     enableValidation() {
-        this._form.addEventListener('submit', (e) => {
-            e.preventDefault();
-        });
         this._setEventListeners();
     }
 
@@ -54,13 +52,13 @@ export class FormValidator {
     _showError(form, error, input) {
         input.classList.add(this._inputErrorClass);
         error.textContent = input.validationMessage;
-        error.classList.add(settings.errorClass);
+        error.classList.add(this._errorClass);
     }
 
     _hideError(form, error, input) {
         input.classList.remove(this._inputErrorClass);
         error.textContent = '';
-        error.classList.remove(settings.errorClass);
+        error.classList.remove(this._errorClass);
     }
 
     _checkInputs(form, input) {

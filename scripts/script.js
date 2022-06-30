@@ -41,7 +41,8 @@ initialCards.forEach(cardElement => {
   renderCard(cardElement);
 });
 
-const editCardSubmitHandler = () => {
+const editCardSubmitHandler = (e) => {
+  e.preventDefault();
   const card = {
     link: cardEditorInputLink.value,
     name: cardEditorInputName.value
@@ -56,7 +57,8 @@ const renderInputs = () => {
   jobInput.value = job.textContent;
 };
 
-const handleProfileFormSubmit = () => {
+const handleProfileFormSubmit = (e) => {
+  e.preventDefault();
   author.textContent = nameInput.value;
   job.textContent = jobInput.value;
   closePopup(popupProfile);
