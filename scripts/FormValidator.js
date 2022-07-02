@@ -1,5 +1,3 @@
-/* import { settings } from "./variables.js"; */
-
 export class FormValidator {
     constructor(settings, form) {
         this._settings = settings;
@@ -16,58 +14,71 @@ export class FormValidator {
     }
 
     _setEventListeners() {
-        const inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
-        const button = this._form.querySelector(this._submitButtonSelector);
-        this._toggleButtonState(button, inputList);
-        inputList.forEach((input) => {
+        this._inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
+        this._button = this._form.querySelector(this._submitButtonSelector);
+        this._toggleButtonState();
+        this._inputList.forEach((input) => {
             input.addEventListener('input', () => {
-                this._checkInputs(form, input);
-                this._toggleButtonState(button, inputList);
+                this._checkInputs(input);
+                this._toggleButtonState();
             });
         });
     }
 
-    _toggleButtonState(button, inputList) {
-        if (this._checkInvalidInputs(inputList) === true) {
-            this._disableButton(button);
+    resetValidation() {
+        this._toggleButtonState();
+        this._inputList.forEach((input) => {
+            this._error = this._form.querySelector(`.${input.id}-error`);
+            this._hideError(input);
+        });
+    }
+
+    _toggleButtonState() {
+        if (this._checkInvalidInputs() === true) {
+            this.disableButton();
         } else {
-            this._enableButton(button);
+            this._enableButton();
         }
     }
 
-    _enableButton(button) {
-        button.classList.remove(this._inactiveButtonClass);
-        button.disabled = false;
+    _enableButton() {
+        this._button.classList.remove(this._inactiveButtonClass);
+        this._button.disabled = false;
     }
 
-    _disableButton(button) {
-        button.classList.add(this._inactiveButtonClass);
-        button.disabled = true;
+    // Сделал disableButton() публичным, чтобы выключать кнопку при открытии поп-апа редактирования, 
+    // если нет изменений - данные нельзя отправить.
+    disableButton() { 
+        this._button.classList.add(this._inactiveButtonClass);
+        this._button.disabled = true;
     }
 
-    _checkInvalidInputs(inputList) {
-        return inputList.some((input) => !input.validity.valid);
+    _checkInvalidInputs() {
+        return this._inputList.some((input) => !input.validity.valid);
     }
 
-    _showError(form, error, input) {
+    _showError(input) {
         input.classList.add(this._inputErrorClass);
-        error.textContent = input.validationMessage;
-        error.classList.add(this._errorClass);
+        this._error.textContent = input.validationMessage;
+        this._error.classList.add(this._errorClass);
     }
 
-    _hideError(form, error, input) {
+    _hideError(input) {
+        if (this._error === false) {
+            return;
+        }
         input.classList.remove(this._inputErrorClass);
-        error.textContent = '';
-        error.classList.remove(this._errorClass);
+        this._error.textContent = '';
+        this._error.classList.remove(this._errorClass);
     }
 
-    _checkInputs(form, input) {
-            const error = this._form.querySelector(`.${input.id}-error`);
-            if (!input.validity.valid) {
-                this._showError(form, error, input);
-            } else {
-                this._hideError(form, error, input);
-            }
+    _checkInputs(input) {
+        this._error = this._form.querySelector(`.${input.id}-error`);
+        if (!input.validity.valid) {
+            this._showError(input);
+        } else {
+            this._hideError(input);
+        }
     }
 }
 

@@ -1,25 +1,5 @@
-import { nameInput, author, job, jobInput, initialCards, buttonOpenPopupProfileEdit, popupProfile, cardTemplateContainer, cardEditor, cardPopupBtn, cardEditorInputName, cardEditorInputLink, cardForm, profileForm, cardButton, popupsList, profileBtn, formsList, settings } from "./variables.js";
-import { FormValidator } from "./FormValidator.js";
+import { profileValidation, cardValidation, nameInput, author, job, jobInput, initialCards, buttonOpenPopupProfileEdit, popupProfile, cardTemplateContainer, cardEditor, cardPopupBtn, cardEditorInputName, cardEditorInputLink, cardForm, profileForm, cardButton, popupsList, profileBtn, formsList, settings } from "./variables.js";
 import { Card } from "./Card.js";
-
-const hideError = (form, error, input, settings) => {
-  input.classList.remove(settings.inputErrorClass);
-  error.textContent = '';
-  error.classList.remove(settings.errorClass);
-};
-
-const removeErrorsOpenedPopups = (form) => {
-  const inputs = Array.from(form.querySelectorAll(settings.inputSelector));
-  inputs.forEach(input => {
-    const error = form.querySelector(`.${input.id}-error`);
-    hideError(form, error, input, settings);
-  });
-};
-
-const disableButton = (button, settings) => {
-  button.classList.add(settings.inactiveButtonClass);
-  button.disabled = true;
-};
 
 export const openPopup = (item) => {
   item.classList.add('popup_opened');
@@ -31,14 +11,19 @@ const closePopup = (item) => {
   document.removeEventListener('keyup', closeByEscape);
 }
 
-const renderCard = (cardElement) => {
-  const card = new Card(cardElement);
+const createCard = (cardElement) => {
+  const card = new Card(cardElement, '#card-template');
   const cardItem = card.generateCard();
-  cardTemplateContainer.prepend(cardItem);
+  return cardItem;
 };
 
+const renderCardPrepend = (cardElement) => {
+  const newCard = createCard(cardElement);
+  cardTemplateContainer.prepend(newCard);
+}
+
 initialCards.forEach(cardElement => {
-  renderCard(cardElement);
+  renderCardPrepend(cardElement);
 });
 
 const editCardSubmitHandler = (e) => {
@@ -47,7 +32,7 @@ const editCardSubmitHandler = (e) => {
     link: cardEditorInputLink.value,
     name: cardEditorInputName.value
   };
-  renderCard(card);
+  renderCardPrepend(card);
   cardForm.reset();
   closePopup(cardEditor);
 };
@@ -72,33 +57,27 @@ const closeByEscape = (evt) => {
 };
 
 const setCardListener = () => {
-  removeErrorsOpenedPopups(cardEditor);
   openPopup(cardEditor);
   cardForm.reset();
-  disableButton(cardButton, settings);
+  cardValidation.resetValidation();
 };
 
 const setProfileListener = () => {
-  removeErrorsOpenedPopups(popupProfile);
   openPopup(popupProfile);
   renderInputs();
-  disableButton(profileBtn, settings);
+  profileValidation.resetValidation();
+  profileValidation.disableButton();
 };
 
 const closePopupByClick = (evt) => {
   if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('popup__button-escape')) {
-    const popup = evt.target.closest('.popup_opened');
-    closePopup(popup);
+    closePopup(evt.currentTarget);
   }
 };
 
-formsList.forEach(form => {
-  const item = new FormValidator(settings, form);
-  item.enableValidation();
-});
+profileValidation.enableValidation();
+cardValidation.enableValidation();
 
-
-// выключаю "мелькания" скрытых поп-апов при загрузке страницы
 const preloadAnimationCanceling = () => {
   popupsList.forEach(popup => popup.classList.add('popup_animated'));
 };
