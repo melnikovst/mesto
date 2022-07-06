@@ -52,3 +52,18 @@ export class Card {
     cardImage.alt = this._name;
   }
 }
+/* 
+const horizontalCardList = new Section(
+  {
+    data: items,
+    renderer: () => {
+      const card = isGrid
+        ? new DefaultCard(item, '.default-card')
+        : new HorizontalCard(item, '.horizontal-card');
+
+      const cardElement = card.generateCard();
+
+      this.setItem(cardElement);
+    }
+  }, cardListSelector);
+   */
