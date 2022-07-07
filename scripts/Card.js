@@ -1,5 +1,5 @@
 import { bigImgPopup, cardImage, cardTitle } from "./variables.js";
-import { openPopup } from "./script.js";
+/* import { openPopup } from "./script.js"; */
 
 export class Card {
   constructor(initialCards, cardSelector) {
