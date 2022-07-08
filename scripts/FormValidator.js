@@ -46,8 +46,6 @@ export class FormValidator {
         this._button.disabled = false;
     }
 
-    // Сделал disableButton() публичным, чтобы выключать кнопку при открытии поп-апа редактирования, 
-    // если нет изменений - данные нельзя отправить.
     disableButton() { 
         this._button.classList.add(this._inactiveButtonClass);
         this._button.disabled = true;

@@ -1,11 +1,9 @@
-import { bigImgPopup, cardImage, cardTitle } from "./variables.js";
-/* import { openPopup } from "./script.js"; */
-
 export class Card {
-  constructor(initialCards, cardSelector) {
+  constructor(initialCards, cardSelector, handleCardClick) {
     this._name = initialCards.name;
     this._link = initialCards.link;
     this._cardTemplate = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getElement() {
@@ -32,7 +30,7 @@ export class Card {
       this._handleDeleting();
     });
     this._item.querySelector('.card__image').addEventListener('click', () => {
-      this._handleImagePopup();
+      this._handleCardClick(this._name, this._link);
     })
   }
 
@@ -44,26 +42,4 @@ export class Card {
     this._item.remove();
     this._item = null;
   }
-
-  _handleImagePopup() {
-    openPopup(bigImgPopup);
-    cardImage.src = this._link;
-    cardTitle.textContent = this._name;
-    cardImage.alt = this._name;
-  }
 }
-/* 
-const horizontalCardList = new Section(
-  {
-    data: items,
-    renderer: () => {
-      const card = isGrid
-        ? new DefaultCard(item, '.default-card')
-        : new HorizontalCard(item, '.horizontal-card');
-
-      const cardElement = card.generateCard();
-
-      this.setItem(cardElement);
-    }
-  }, cardListSelector);
-   */
