@@ -58,7 +58,7 @@ const preloadAnimationCanceling = () => {
 };
 
 const setInfo = new UserInfo({
-  authorSelector: author,
+  profileName: author,
   profileDescription: job
 });
 
@@ -81,6 +81,7 @@ const addCardPopup = new PopupWithForm(cardEditor, editCardSubmitHandler);
 addCardPopup.setEventListeners();
 
 window.addEventListener('DOMContentLoaded', preloadAnimationCanceling);
+
 cardPopupBtn.addEventListener('click', setCardListener);
 buttonOpenPopupProfileEdit.addEventListener('click', setProfileListener);
 profileBtn.addEventListener('submit', handleProfileFormSubmit);

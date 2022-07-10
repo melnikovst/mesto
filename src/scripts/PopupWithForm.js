@@ -25,6 +25,7 @@ export class PopupWithForm extends Popup {
     }
     close() {
         super.close();
-        setTimeout(() => this._form.reset(), 1000)
+        //SetTimeout добавил, т.к. форма очищается быстрее, чем заканчивается анимация, некрасиво :)
+        setTimeout(() => this._form.reset(), 500) 
     }
 }

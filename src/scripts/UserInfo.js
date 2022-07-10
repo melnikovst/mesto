@@ -1,6 +1,6 @@
 export class UserInfo {
-    constructor({ authorSelector , profileDescription }) {
-        this._author = authorSelector;
+    constructor({ profileName , profileDescription }) {
+        this._author = profileName;
         this._description = profileDescription;
     }
 
