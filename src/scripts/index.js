@@ -64,7 +64,6 @@ const setInfo = new UserInfo({
 
 const handleProfileFormSubmit = (obj) => {
   setInfo.setUserInfo(obj);
-  console.log(obj)
 };
 
 const setProfileListener = () => {
