@@ -6,30 +6,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mesto</title>
-    <link rel="stylesheet" href="./pages/index.css">
 </head>
 
 <body class="root">
     <div class="page">
         <header class="header">
-            <img src="./images/logo-header.svg" alt="Логотип в шапке сайта" class="logo">
+            <img src="<%=require('./images/logo-header.svg')%>" alt="Логотип в шапке сайта" class="logo">
         </header>
         <main class="content">
             <section class="profile">
                 <div class="profile__wrapper">
-                    <img src="./images/image.png" alt="Фото профиля" class="profile__image">
+                    <img src="<%=require('./images/image.png')%>" alt="Фото профиля" class="profile__image">
                     <div class="profile__text-wrapper">
                         <div class="profile__title-container">
-                            <h1 class="profile__title">Жак-Ив Кусто</h1>
+                            <h1 class="profile__title">Жак-ив Кусто</h1>
                             <button type="button" aria-label="Редактировать профиль" class="profile__title-button">
-                                <img src="./images/Vector.svg" alt="Кнопка Редактировать"
+                                <img src="<%=require('./images/Vector.svg')%>" alt="Кнопка Редактировать"
                                     class="profile__title-button-vector">
                             </button>
                         </div>
-                        <p class="profile__subtitle">Функция работай!</p>
+                        <p class="profile__subtitle">Исследователь океана</p>
                     </div>
                     <button type="button" aria-label="Добавить" class="profile__button">
-                        <img src="./images/Vector2.svg" alt="Кнопка профиля" class="profile__button-vector">
+                        <img src="<%=require('./images/Vector2.svg')%>" alt="Кнопка профиля" class="profile__button-vector">
                     </button>
                 </div>
             </section>
@@ -38,7 +37,7 @@
                 <template id="card-template">
                     <article class="card">
                         <button class="card__delete-button"></button>
-                        <img src="./images/kirill-pershin-1088404-unsplash.png" alt="Изображение в карточке"
+                        <img src="" alt="Изображение в карточке"
                             class="card__image">
                         <div class="card__title-wrapper">
                             <h2 class="card__title"></h2>
@@ -58,10 +57,10 @@
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <form novalidate name="form" class="form form_type_profile">
                     <fieldset class="form__fieldset">
-                        <input type="text" class="form__input form__input_type_name" name="form-name" required
+                        <input type="text" class="form__input form__input_type_name" name="name" required
                             minlength="2" maxlength="40" placeholder="Ваше имя" id="name-input">
                         <span class="form__invalid-message name-input-error">2222</span>
-                        <input type="text" class="form__input form__input_type_job" name="form-job"
+                        <input type="text" class="form__input form__input_type_job" name="description"
                             placeholder="Ваш род деятельности" minlength="2" maxlength="200" id="job-input" required>
                         <span class="form__invalid-message job-input-error"></span>
                     </fieldset>
@@ -89,7 +88,7 @@
             </div>
         </div>
 
-        <div class="popup popup_type_picture">
+        <div id="img-Template" class="popup popup_type_picture">
             <figure class="popup__image">
                 <img src="#" alt="АЛЬТ" class="popup__image-item">
                 <figcaption class="popup__image-subtitle"></figcaption>
@@ -98,7 +97,6 @@
         </div>
 
     </div>
-    <script type="module" src="./scripts/script.js"></script>
 </body>
 
 </html>
