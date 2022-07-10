@@ -67,14 +67,13 @@ const handleProfileFormSubmit = (obj) => {
   console.log(obj)
 };
 
-const setProfileListener = (obj) => {
-  obj = setInfo.getUserInfo();
+const setProfileListener = () => {
+  setInfo.getUserInfo();
   popupFormHandler.open();
   nameInput.value = author.textContent;
   jobInput.value = job.textContent;
   profileValidation.resetValidation();
   profileValidation.disableButton();
-  console.log(obj)
 };
 
 const popupFormHandler = new PopupWithForm(popupProfile, handleProfileFormSubmit);
