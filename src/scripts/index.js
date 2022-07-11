@@ -8,9 +8,10 @@ import { PopupWithImage } from "./PopupWithImage.js";
 import { PopupWithForm } from "./PopupWithForm.js";
 import { Section } from "./Section.js";
 import { UserInfo } from "./UserInfo.js";
-import '../pages/index.css'
+/* import '../pages/index.css' */
 
 const imgPopup = new PopupWithImage(bigImgPopup);
+const container = document.querySelector('.card-container')
 
 
 const handleCardClick = (name, link) => {
@@ -24,7 +25,7 @@ const renderCards = new Section({
     const cardEl = card.generateCard();
     renderCards.addItem(cardEl);
   }
-}, cardTemplateContainer);
+}, container);
 
 imgPopup.setEventListeners();
 
@@ -40,7 +41,7 @@ const editCardSubmitHandler = () => {
     name: cardEditorInputName.value
   };
   const cardItem = createCard(card);
-  cardTemplateContainer.prepend(cardItem);
+  container.prepend(cardItem);
   addCardPopup.close();
 };
 
@@ -87,3 +88,40 @@ buttonOpenPopupProfileEdit.addEventListener('click', setProfileListener);
 profileBtn.addEventListener('submit', handleProfileFormSubmit);
 cardButton.addEventListener('submit', editCardSubmitHandler);
 renderCards.renderItems();
+
+const listElement = document.querySelector('.card');
+
+let cardIndex = 0;
+
+const sliderBtn = document.querySelector('.slider-button-next');
+document.querySelector('.slider-button-next').addEventListener('click', () => {
+  const listElems = document.querySelectorAll('.card');
+  const slidesCount = listElems.length;
+  const cardWidth = listElement.clientWidth + 20;
+  if (cardIndex >= slidesCount - 3) {
+    cardIndex = -1;
+  }
+  if (slidesCount <= 2) {
+    sliderBtn.setAttribute('disabled', true)
+  }
+  cardIndex++;
+  container.style.transform = `translateX(-${cardIndex * cardWidth}px)`; 
+  console.log(slidesCount + ' ' + 'длина')
+  console.log(cardIndex)
+});
+
+const cardSection = document.querySelector('.cards');
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 900) {
+    cardSection.classList.add('card-flex');
+  }
+  if (window.innerWidth < 900) {
+    container.removeAttribute('style', 'transform')
+    cardSection.classList.remove('card-flex');
+  }
+})
+
+
+console.log(window.innerWidth)
+console.log(container)

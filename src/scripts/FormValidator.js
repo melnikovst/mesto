@@ -52,7 +52,9 @@ export class FormValidator {
     }
 
     _checkInvalidInputs() {
-        return this._inputList.some((input) => !input.validity.valid);
+        return this._inputList.some((input) => {
+            return !input.validity.valid;
+        })
     }
 
     _showError(input) {

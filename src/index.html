@@ -6,50 +6,60 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mesto</title>
+    <link rel="stylesheet" href="./pages/index.css">
 </head>
 
 <body class="root">
     <div class="page">
         <header class="header">
-            <img src="<%=require('./images/logo-header.svg')%>" alt="Логотип в шапке сайта" class="logo">
+            <!-- <img src="<%=require('./images/logo-header.svg')%>" alt="Логотип в шапке сайта" class="logo"> -->
+            <img src="./images/logo-header.svg" alt="Фото профиля" class="profile__image">
         </header>
         <main class="content">
             <section class="profile">
                 <div class="profile__wrapper">
-                    <img src="<%=require('./images/image.png')%>" alt="Фото профиля" class="profile__image">
+                    <!-- <img src="<%=require('./images/image.png')%>" alt="Фото профиля" class="profile__image"> -->
+                    <img src="./images/image.png" alt="Фото профиля" class="profile__image">
                     <div class="profile__text-wrapper">
                         <div class="profile__title-container">
                             <h1 class="profile__title">Жак-ив Кусто</h1>
                             <button type="button" aria-label="Редактировать профиль" class="profile__title-button">
-                                <img src="<%=require('./images/Vector.svg')%>" alt="Кнопка Редактировать"
+                                <!-- <img src="<%=require('./images/Vector.svg')%>" alt="Кнопка Редактировать"
+                                    class="profile__title-button-vector"> -->
+                                <img src="./images/Vector.svg" alt="Кнопка Редактировать"
                                     class="profile__title-button-vector">
                             </button>
                         </div>
                         <p class="profile__subtitle">Исследователь океана</p>
                     </div>
                     <button type="button" aria-label="Добавить" class="profile__button">
-                        <img src="<%=require('./images/Vector2.svg')%>" alt="Кнопка профиля" class="profile__button-vector">
+                        <!-- <img src="<%=require('./images/Vector2.svg')%>" alt="Кнопка профиля" class="profile__button-vector"> -->
+                        <img src="./images/Vector2.svg" alt="Кнопка профиля" class="profile__button-vector">
                     </button>
                 </div>
             </section>
 
-            <section class="cards">
-                <template id="card-template">
-                    <article class="card">
-                        <button class="card__delete-button"></button>
-                        <img src="" alt="Изображение в карточке"
-                            class="card__image">
-                        <div class="card__title-wrapper">
-                            <h2 class="card__title"></h2>
-                            <button type="button" aria-label="Лайк" class="card__button"></button>
-                        </div>
-                    </article>
-                </template>
+            <section class="cards card-flex">
+                <div class="card-container">
+                    <template id="card-template">
+                        <article class="card">
+                            <button class="card__delete-button"></button>
+                            <img src="" alt="Изображение в карточке" class="card__image">
+                            <div class="card__title-wrapper">
+                                <h2 class="card__title"></h2>
+                                <button type="button" aria-label="Лайк" class="card__button"></button>
+                            </div>
+                        </article>
+                    </template>
+                </div>
             </section>
         </main>
         <footer class="footer">
             <p class="footer__copyright">© 2020 Mesto Russia</p>
         </footer>
+        <template id="slider">
+
+        </template>
 
         <div class="popup popup_type_profile-info">
             <div class="popup__container">
@@ -64,11 +74,13 @@
                             placeholder="Ваш род деятельности" minlength="2" maxlength="200" id="description" required>
                         <span class="form__invalid-message description-error"></span>
                     </fieldset>
-                    <button type="submit" aria-label="Сохранить" id="profile-button" class="form__button">Сохранить</button>
+                    <button type="submit" aria-label="Сохранить" id="profile-button"
+                        class="form__button">Сохранить</button>
                 </form>
             </div>
         </div>
 
+        <button class="slider-button slider-button-next">&gt;</button>
         <div class="popup popup_type_card-add">
             <div class="popup__container">
                 <button type="button" aria-label="Закрыть всплывающее окно"
@@ -97,6 +109,7 @@
         </div>
 
     </div>
+    <script type="module" src="./scripts/index.js"></script>
 </body>
 
 </html>
