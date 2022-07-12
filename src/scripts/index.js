@@ -12,7 +12,6 @@ import '../pages/index.css'
 
 const imgPopup = new PopupWithImage(bigImgPopup);
 
-
 const handleCardClick = (name, link) => {
   imgPopup.open(name, link);
 }
@@ -79,9 +78,7 @@ const popupFormHandler = new PopupWithForm(popupProfile, handleProfileFormSubmit
 popupFormHandler.setEventListeners();
 const addCardPopup = new PopupWithForm(cardEditor, editCardSubmitHandler);
 addCardPopup.setEventListeners();
-
 window.addEventListener('DOMContentLoaded', preloadAnimationCanceling);
-
 cardPopupBtn.addEventListener('click', setCardListener);
 buttonOpenPopupProfileEdit.addEventListener('click', setProfileListener);
 profileBtn.addEventListener('submit', handleProfileFormSubmit);

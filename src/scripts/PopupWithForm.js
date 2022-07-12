@@ -6,6 +6,7 @@ export class PopupWithForm extends Popup {
         this._submitHandler = submitHandler;
         this._form = this._item.querySelector('.form');
     }
+
     _getInputValues() {
         this._inputsList = this._form.querySelectorAll('.form__input');
         this._inputData = {};
@@ -14,6 +15,7 @@ export class PopupWithForm extends Popup {
         });
         return this._inputData;
     }
+
     setEventListeners() {
         super.setEventListeners();
         this._item.addEventListener('submit', (e) => {
@@ -23,6 +25,7 @@ export class PopupWithForm extends Popup {
             this.close();
         })
     }
+    
     close() {
         super.close();
         //SetTimeout добавил, т.к. форма очищается быстрее, чем заканчивается анимация, некрасиво :)
