@@ -13,7 +13,7 @@
 @media screen and (min-width: 900px) {
     .card {
         flex-shrink: 0;
-        width: 280px
+        width: 280px;
     }
 }
 
@@ -31,10 +31,31 @@
 
 .slider-button-next:hover {
     opacity: .2;
+    cursor: pointer;
+}
+
+.slider-button-prev {
+    position: absolute;
+    bottom: 141px;
+    left: 0;
+    width: 150px;
+    height: 40px;
+    background-color: white;
+    z-index: 1111;
+    transition: opacity .5s ease;
+    border-radius: 15px;
+}
+
+.slider-button-prev:hover {
+    opacity: .2;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 900px) {
     .slider-button-next {
+        display: none;
+    }
+    .slider-button-prev {
         display: none;
     }
 }

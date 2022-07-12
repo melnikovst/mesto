@@ -92,36 +92,95 @@ renderCards.renderItems();
 const listElement = document.querySelector('.card');
 
 let cardIndex = 0;
-
-const sliderBtn = document.querySelector('.slider-button-next');
+let count = 0
+const changing = throttle(changeSlide, 150)
+const sliderNextBtn = document.querySelector('.slider-button-next');
+const sliderPrevBtn = document.querySelector('.slider-button-prev');
 document.querySelector('.slider-button-next').addEventListener('click', () => {
+  changing('next');
+});
+
+function throttle(someFunc, timeout) {
+  let timer = null;
+  return function perform(...args) {
+    if (timer) return
+    timer = setTimeout(() => {
+      someFunc(...args);
+      clearTimeout(timer);
+      timer = null
+    }, timeout);
+  };
+}
+
+function changeSlide(direction) {
   const listElems = document.querySelectorAll('.card');
   const slidesCount = listElems.length;
   const cardWidth = listElement.clientWidth + 20;
-  if (cardIndex >= slidesCount - 3) {
-    cardIndex = -1;
+  if (direction === 'next') {
+    cardIndex++
+    if (cardIndex === slidesCount - 2) {
+      cardIndex = 0;
+    }
   }
-  if (slidesCount <= 2) {
-    sliderBtn.setAttribute('disabled', true)
+  else if (direction === 'prev') {
+    container.style.transform = `translateX(${cardIndex * cardWidth}px)`;
+    cardIndex--
+    if (cardIndex < 0) {
+      cardIndex = slidesCount - 3;
+    }
   }
-  cardIndex++;
-  container.style.transform = `translateX(-${cardIndex * cardWidth}px)`; 
-  console.log(slidesCount + ' ' + 'длина')
-  console.log(cardIndex)
-});
+  container.style.transform = `translateX(-${cardIndex * cardWidth}px)`;
+}
+
+sliderPrevBtn.addEventListener('click', () => {
+  changing('prev')
+}
+)
 
 const cardSection = document.querySelector('.cards');
-
+const navigateContainer = document.querySelector('.navigate-buttons')
 window.addEventListener('resize', () => {
   if (window.innerWidth > 900) {
     cardSection.classList.add('card-flex');
+    navigateContainer.style.display = 'flex';
+    sliderNextBtn.style.display = 'block';
+    gridBtn.style.visibility = 'visible';
+    flexBtn.style.visibility = 'hidden';
   }
   if (window.innerWidth < 900) {
     container.removeAttribute('style', 'transform')
     cardSection.classList.remove('card-flex');
+    sliderNextBtn.style.display = 'none';
+    navigateContainer.style.display = 'none';
   }
 })
 
+const gridBtn = document.querySelector('.grid')
+const flexBtn = document.querySelector('.flex')
+
+gridBtn.addEventListener('click', () => {
+  container.removeAttribute('style', 'transform');
+  container.classList.remove('card-flex');
+  container.style.display = 'grid';
+  sliderNextBtn.style.display = 'none';
+  sliderPrevBtn.style.display = 'none';
+  flexBtn.style.visibility = 'visible';
+  gridBtn.style.visibility = 'hidden'
+})
+
+flexBtn.addEventListener('click', () => {
+  if (container.style.display = 'grid') {
+    container.style.display = 'flex';
+    sliderNextBtn.style.display = 'block';
+    sliderPrevBtn.style.display = 'block';
+    gridBtn.style.visibility = 'visible';
+    flexBtn.style.visibility = 'hidden';
+  }
+})
+
+window.addEventListener('DOMContentLoaded', () => {
+  flexBtn.style.visibility = 'hidden';
+})
 
 console.log(window.innerWidth)
 console.log(container)

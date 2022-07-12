@@ -43,9 +43,49 @@ export const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
   },
   {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
+    name: 'Файолет-Тюрме',
+    link: 'https://images.unsplash.com/photo-1655032827680-1c5acdc6dea4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
+  },
+  {
+    name: 'Порто',
+    link: 'https://images.unsplash.com/photo-1655063971080-a96a49fa8a51?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
+  },
+  {
+    name: 'Langkawi skybridge, Малайзия',
+    link: 'https://images.unsplash.com/photo-1657462912343-eff2e51b8e6b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80'
+  },
+  {
+    name: 'Лувр, Франция',
+    link: 'https://images.unsplash.com/photo-1657420228473-e3fee079626b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=327&q=80'
+  },
+  {
+    name: 'Альпы',
+    link: 'https://images.unsplash.com/photo-1657382451966-3448f72ea564?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1228&q=80'
+  },
+  {
+    name: 'Колизей, Рим',
+    link: 'https://images.unsplash.com/photo-1656541314159-a2631f5b8c1d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
+  },
+  {
+    name: 'Рио-де-Жанейро, Бразилия',
+    link: 'https://images.unsplash.com/photo-1656989048329-4226c441e501?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=326&q=80'
+  },
+  {
+    name: 'Казанский собор, Казань',
+    link: 'https://images.unsplash.com/photo-1655404474510-8ece3da2884b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=388&q=80'
+  },
+  {
+    name: 'Сидней, Австралия',
+    link: 'https://images.unsplash.com/photo-1656893239772-d75e35ea379b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80'
+  },
+  {
+    name: 'Гонконг, Китай',
+    link: 'https://images.unsplash.com/photo-1656465344734-94056634db85?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1322&q=80'
+  },
+  {
+    name: 'Амстердам, Нидерланды',
+    link: 'https://images.unsplash.com/photo-1656488551854-58448c688008?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=415&q=80'
+  },
 ];
 
 export const settings = {

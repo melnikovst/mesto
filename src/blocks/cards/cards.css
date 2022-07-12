@@ -1,12 +1,40 @@
 .cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
+/*     display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(282px, 1fr)); */
     row-gap: 20px;
     justify-items: center;
     max-width: 100%;
     margin: 0 19px;
     padding-bottom: 48px;
     overflow: hidden;
+}
+
+.navigate-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 15px;
+}
+
+.grid {
+    margin-left: 30px;
+}
+
+.flex {
+    margin-right: 30px;
+}
+
+.navigate-buttons__button {
+    width: 220px;
+    height: 40px;
+    border-radius: 15px;
+    background-color: white;
+    transition: opacity .5s ease;
+}
+
+.navigate-buttons__button:hover {
+    cursor: pointer;
+    opacity: .2;
 }
 
 .card-flex {
@@ -19,10 +47,10 @@
 
 .card-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     row-gap: 20px;
     justify-items: center;
-    max-width: 100%;
+    max-width: 880px;
     margin: 0 19px;
     padding-bottom: 48px;
     column-gap: 20px;
