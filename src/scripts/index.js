@@ -134,8 +134,7 @@ function changeSlide(direction) {
 
 sliderPrevBtn.addEventListener('click', () => {
   changing('prev')
-}
-)
+});
 
 const cardSection = document.querySelector('.cards');
 const navigateContainer = document.querySelector('.navigate-buttons')
