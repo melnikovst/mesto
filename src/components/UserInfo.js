@@ -6,14 +6,14 @@ export class UserInfo {
 
     getUserInfo() {
         this._object = {
-            name: this._profileName.textContent,
+            author: this._profileName.textContent,
             description: this._description.textContent,
         };
         return this._object;
     }
 
     setUserInfo(obj) {
-        this._profileName.textContent = obj.name;
+        this._profileName.textContent = obj.author;
         this._description.textContent = obj.description;
     }
 }
