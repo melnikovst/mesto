@@ -6,7 +6,7 @@ export class Slider {
         this._cardIndex = 0;
         this._throttle = throttle;
         this.changeSlideThrottling = this._throttle(this._changeSlide.bind(this), 150)
-    } 
+    }
 
     _changeSlide(direction) {
         this._cardList = document.querySelectorAll('.card')
@@ -35,15 +35,11 @@ export class Slider {
     }
 
     setButtonsEventListeners() {
-        this._cardList = document.querySelectorAll('.card')
-        this._slidesCount = this._cardList.length;
         this._buttons.prev.addEventListener('click', () => {
             this.changeSlideThrottling('prev');
-            console.log(this._slidesCount)
         })
         this._buttons.next.addEventListener('click', () => {
             this.changeSlideThrottling('next');
-            console.log(this._slidesCount)
         })
     }
 }
