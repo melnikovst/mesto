@@ -1,7 +1,7 @@
 import {
   profileValidation, cardValidation, nameInput, author, job, jobInput, initialCards,
   buttonOpenPopupProfileEdit, popupProfile, cardTemplateContainer, cardEditor, cardPopupBtn,
-  cardEditorInputName, cardEditorInputLink, cardForm, popupsList, bigImgPopup, profileBtn, cardButton
+  cardEditorInputName, cardEditorInputLink, cardForm, popupsList, bigImgPopup, profileBtn, cardButton, listElement, buttonsObj
 } from "./variables.js";
 import { Card } from "./Card.js";
 import { PopupWithImage } from "./PopupWithImage.js";
@@ -9,6 +9,7 @@ import { PopupWithForm } from "./PopupWithForm.js";
 import { Section } from "./Section.js";
 import { UserInfo } from "./UserInfo.js";
 import '../pages/index.css'
+import { Slider } from "./Slider.js";
 
 const imgPopup = new PopupWithImage(bigImgPopup);
 const container = document.querySelector('.card-container')
@@ -89,18 +90,11 @@ profileBtn.addEventListener('submit', handleProfileFormSubmit);
 cardButton.addEventListener('submit', editCardSubmitHandler);
 renderCards.renderItems();
 
-const listElement = document.querySelector('.card');
+const editSlider = new Slider(listElement, buttonsObj, container, throttling);
 
-let cardIndex = 0;
-let count = 0
-const changing = throttle(changeSlide, 150)
-const sliderNextBtn = document.querySelector('.slider-button-next');
-const sliderPrevBtn = document.querySelector('.slider-button-prev');
-document.querySelector('.slider-button-next').addEventListener('click', () => {
-  changing('next');
-});
+editSlider.setButtonsEventListeners();
 
-function throttle(someFunc, timeout) {
+function throttling(someFunc, timeout) {
   let timer = null;
   return function perform(...args) {
     if (timer) return
@@ -112,44 +106,20 @@ function throttle(someFunc, timeout) {
   };
 }
 
-function changeSlide(direction) {
-  const listElems = document.querySelectorAll('.card');
-  const slidesCount = listElems.length;
-  const cardWidth = listElement.clientWidth + 20;
-  if (direction === 'next') {
-    cardIndex++
-    if (cardIndex === slidesCount - 2) {
-      cardIndex = 0;
-    }
-  }
-  else if (direction === 'prev') {
-    container.style.transform = `translateX(${cardIndex * cardWidth}px)`;
-    cardIndex--
-    if (cardIndex < 0) {
-      cardIndex = slidesCount - 3;
-    }
-  }
-  container.style.transform = `translateX(-${cardIndex * cardWidth}px)`;
-}
-
-sliderPrevBtn.addEventListener('click', () => {
-  changing('prev')
-});
-
 const cardSection = document.querySelector('.cards');
 const navigateContainer = document.querySelector('.navigate-buttons')
 window.addEventListener('resize', () => {
   if (window.innerWidth > 900) {
     cardSection.classList.add('card-flex');
     navigateContainer.style.display = 'flex';
-    sliderNextBtn.style.display = 'block';
+    buttonsObj.next.style.display = 'block';
     gridBtn.style.visibility = 'visible';
     flexBtn.style.visibility = 'hidden';
   }
   if (window.innerWidth < 900) {
     container.removeAttribute('style', 'transform')
     cardSection.classList.remove('card-flex');
-    sliderNextBtn.style.display = 'none';
+    buttonsObj.next.style.display = 'none';
     navigateContainer.style.display = 'none';
   }
 })
@@ -161,8 +131,8 @@ gridBtn.addEventListener('click', () => {
   container.removeAttribute('style', 'transform');
   container.classList.remove('card-flex');
   container.style.display = 'grid';
-  sliderNextBtn.style.display = 'none';
-  sliderPrevBtn.style.display = 'none';
+  buttonsObj.next.style.display = 'none';
+  buttonsObj.prev.style.display = 'none';
   flexBtn.style.visibility = 'visible';
   gridBtn.style.visibility = 'hidden'
 })
@@ -170,8 +140,8 @@ gridBtn.addEventListener('click', () => {
 flexBtn.addEventListener('click', () => {
   if (container.style.display = 'grid') {
     container.style.display = 'flex';
-    sliderNextBtn.style.display = 'block';
-    sliderPrevBtn.style.display = 'block';
+    buttonsObj.next.style.display = 'block';
+    buttonsObj.prev.style.display = 'block';
     gridBtn.style.visibility = 'visible';
     flexBtn.style.visibility = 'hidden';
   }

@@ -20,6 +20,11 @@ export const cardButton = document.querySelector('#card-button');
 export const popupsList = Array.from(document.querySelectorAll('.popup'));
 export const profileBtn = document.querySelector('#profile-button');
 export const formsList = Array.from(document.querySelectorAll('.form'));
+export const listElement = document.querySelector('.card');
+export const buttonsObj = {
+  next: document.querySelector('.slider-button-next'),
+  prev: document.querySelector('.slider-button-prev')
+}
 
 export const initialCards = [
   {
