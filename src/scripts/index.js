@@ -1,6 +1,6 @@
 import {
   profileValidation, cardValidation, nameInput, author, job, jobInput, initialCards,
-  buttonOpenPopupProfileEdit, popupProfile, cardTemplateContainer, cardEditor, cardPopupBtn,
+  buttonOpenPopupProfileEdit, popupProfile, cardEditor, cardPopupBtn,
   cardEditorInputName, cardEditorInputLink, cardForm, popupsList, bigImgPopup, profileBtn, cardButton, listElement, buttonsObj
 } from "./variables.js";
 import { Card } from "./Card.js";

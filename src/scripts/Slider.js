@@ -1,6 +1,6 @@
 export class Slider {
-    constructor(card, buttons, container, throttle) {
-        this._card = card;
+    constructor(item, buttons, container, throttle) {
+        this._card = item;
         this._buttons = buttons;
         this._container = container;
         this._cardIndex = 0;
@@ -27,6 +27,13 @@ export class Slider {
             if (this._cardIndex < 0) {
                 this._cardIndex = this._slidesCount - 3;
             }
+        }
+        if (this._slidesCount <= 3) {
+            this._buttons.prev.disabled = true;
+            this._buttons.next.disabled = true;
+        } else {
+            this._buttons.prev.disabled = false;
+            this._buttons.next.disabled = false;
         }
         this._container.style.transform = `translateX(-${this._cardIndex * this._dynamicCardElementWidth}px)`;
     }
