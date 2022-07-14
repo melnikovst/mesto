@@ -6,11 +6,14 @@ export class Slider {
         this._cardIndex = 0;
         this._throttle = throttle;
         this.changeSlideThrottling = this._throttle(this._changeSlide.bind(this), 150)
-    }
+    } 
 
     _changeSlide(direction) {
         this._cardList = document.querySelectorAll('.card')
         this._slidesCount = this._cardList.length;
+        if (this._slidesCount <= 3) {
+            return;
+        }
         this._dynamicCardElementWidth = this._container.querySelector('.card').clientWidth + 20;
         if (direction === 'next') {
             this._cardIndex++
@@ -28,22 +31,19 @@ export class Slider {
                 this._cardIndex = this._slidesCount - 3;
             }
         }
-        if (this._slidesCount <= 3) {
-            this._buttons.prev.disabled = true;
-            this._buttons.next.disabled = true;
-        } else {
-            this._buttons.prev.disabled = false;
-            this._buttons.next.disabled = false;
-        }
         this._container.style.transform = `translateX(-${this._cardIndex * this._dynamicCardElementWidth}px)`;
     }
 
     setButtonsEventListeners() {
+        this._cardList = document.querySelectorAll('.card')
+        this._slidesCount = this._cardList.length;
         this._buttons.prev.addEventListener('click', () => {
             this.changeSlideThrottling('prev');
+            console.log(this._slidesCount)
         })
         this._buttons.next.addEventListener('click', () => {
             this.changeSlideThrottling('next');
+            console.log(this._slidesCount)
         })
     }
 }
