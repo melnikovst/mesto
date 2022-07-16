@@ -29,7 +29,6 @@ const handleCardClick = (name, link) => {
 }
 
 const renderCards = new Section({
-  items: initialCards,
   renderer: (cardElement) => {
     const card = createCard(cardElement)
     renderCards.addItem(card);
@@ -84,4 +83,4 @@ addCardPopup.setEventListeners();
 window.addEventListener('DOMContentLoaded', preloadAnimationCanceling);
 cardPopupBtn.addEventListener('click', setCardListener);
 buttonOpenPopupProfileEdit.addEventListener('click', openProfilePopup);
-renderCards.renderItems();
+renderCards.renderItems(initialCards);
