@@ -20,3 +20,10 @@
  [https://melnikovst.github.io/mesto/](https://melnikovst.github.io/mesto/ "Ссылка на GH page")
 ### Спасибо за просмотр данной работы.
 
+<style>
+#foo {color: red}
+</style>
+
+<p id="foo">foo</p>
+
+<p style="color: blue">bar</p>
