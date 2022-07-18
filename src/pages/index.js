@@ -50,7 +50,7 @@ const editCardSubmitHandler = (obj) => {
 
 const setCardListener = () => {
   addCardPopup.open();
-  formValidators['card-form'].resetValidation()
+  formValidators['card-form'].resetValidation();
 };
 
 const preloadAnimationCanceling = () => {
