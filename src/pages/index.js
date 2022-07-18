@@ -2,7 +2,7 @@ import {
   author, job, initialCards,
   buttonOpenPopupProfileEdit, popupProfile, cardTemplateContainer,
   cardEditor, cardPopupBtn,
-  popupsList, bigImgPopup, settings, formValidators
+  popupsList, bigImgPopup, settings, formValidators, avatarImg
 } from "../utils/variables.js";
 import { FormValidator } from "../components/FormValidator.js";
 import { Card } from "../components/Card.js";
@@ -90,4 +90,10 @@ fetch('http://localhost:3000/cards').then((res) => res.json()).then(cards => {
   renderCards.renderItems(cards);
   console.log(cards);
 });
-fetch('http://localhost:3000/me').then((res) => res.json()).then(profile => console.log(profile))
+fetch('http://localhost:3000/me').then((res) => res.json()).then(profile => {
+  console.log(profile)
+  author.textContent = profile.name;
+  job.textContent = profile.about;
+  avatarImg.src = profile.avatar;
+}
+);
