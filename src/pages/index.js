@@ -84,4 +84,9 @@ addCardPopup.setEventListeners();
 window.addEventListener('DOMContentLoaded', preloadAnimationCanceling);
 cardPopupBtn.addEventListener('click', setCardListener);
 buttonOpenPopupProfileEdit.addEventListener('click', openProfilePopup);
-renderCards.renderItems();
+/* renderCards.renderItems(); */
+
+fetch('http://localhost:3000/cards').then((res) => res.json()).then(() => {
+  renderCards.renderItems();
+});
+fetch('http://localhost:3000/me').then((res) => res.json()).then(profile => console.log(profile))
