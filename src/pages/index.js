@@ -29,7 +29,7 @@ const handleCardClick = (name, link) => {
 }
 
 const renderCards = new Section({
-  items: initialCards,
+  /* items: initialCards, */
   renderer: (cardElement) => {
     const card = createCard(cardElement)
     renderCards.addItem(card);
@@ -86,7 +86,8 @@ cardPopupBtn.addEventListener('click', setCardListener);
 buttonOpenPopupProfileEdit.addEventListener('click', openProfilePopup);
 /* renderCards.renderItems(); */
 
-fetch('http://localhost:3000/cards').then((res) => res.json()).then(() => {
-  renderCards.renderItems();
+fetch('http://localhost:3000/cards').then((res) => res.json()).then(cards => {
+  renderCards.renderItems(cards);
+  console.log(cards);
 });
 fetch('http://localhost:3000/me').then((res) => res.json()).then(profile => console.log(profile))
