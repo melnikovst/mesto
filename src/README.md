@@ -19,3 +19,4 @@
  
  [https://melnikovst.github.io/mesto/](https://melnikovst.github.io/mesto/ "Ссылка на GH page")
 ### Спасибо за просмотр данной работы.
+
