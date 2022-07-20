@@ -11,7 +11,7 @@ import { PopupWithForm } from "../components/PopupWithForm.js";
 import { Section } from "../components/Section.js";
 import { UserInfo } from "../components/UserInfo.js";
 import './index.css';
-
+import Api from "../components/Api.js";
 const enableValidation = (config) => {
   const forms = Array.from(document.querySelectorAll(config.formSelector))
   forms.forEach((formElement) => {
@@ -29,7 +29,6 @@ const handleCardClick = (name, link) => {
 }
 
 const renderCards = new Section({
-  /* items: initialCards, */
   renderer: (cardElement) => {
     const card = createCard(cardElement)
     renderCards.addItem(card);
@@ -43,9 +42,13 @@ const createCard = (cardElement) => {
 };
 
 const editCardSubmitHandler = (obj) => {
-  const card = createCard(obj)
-  renderCards.addItem(card);
-  addCardPopup.close();
+  server.addCard(obj)
+  .then(res => res.json())
+  .then(item => {
+    console.log(item);
+    renderCards.addItem(createCard(item));
+    addCardPopup.close();
+  })
 };
 
 const setCardListener = () => {
@@ -58,7 +61,12 @@ const preloadAnimationCanceling = () => {
 };
 
 const handleProfileFormSubmit = (obj) => {
-  setInfo.setUserInfo(obj);
+  server.changeProfile(obj)
+  .then(res => res.json())
+  .then(submit => {
+    console.log(submit)
+    setInfo.setUserInfo(submit);
+  }).catch(err => console.log(err));
 };
 
 const openProfilePopup = () => {
@@ -69,6 +77,26 @@ const openProfilePopup = () => {
   formValidators['profile-form'].disableButton();
   profilePopup.open();
 };
+
+const server = new Api ({
+  url: 'https://mesto.nomoreparties.co/v1/cohort-33',
+  headers: {
+    authorization: 'f5c43062-fa6e-4cd2-82d1-ae866fc3359c',
+    'Content-Type': 'application/json'
+  }
+});
+
+
+server.loadCards().then(res => res.json()).then(cards => {
+  console.log(cards);
+  renderCards.renderItems(cards);
+})
+
+server.loadProfile().then(res => res.json()).then(profile => {
+  author.textContent = profile.name;
+  job.textContent = profile.about;
+  avatarImg.src = profile.avatar;
+})
 
 const profilePopup = new PopupWithForm(popupProfile, handleProfileFormSubmit);
 const addCardPopup = new PopupWithForm(cardEditor, editCardSubmitHandler);
@@ -84,16 +112,3 @@ addCardPopup.setEventListeners();
 window.addEventListener('DOMContentLoaded', preloadAnimationCanceling);
 cardPopupBtn.addEventListener('click', setCardListener);
 buttonOpenPopupProfileEdit.addEventListener('click', openProfilePopup);
-/* renderCards.renderItems(); */
-
-fetch('http://localhost:3000/cards').then((res) => res.json()).then(cards => {
-  renderCards.renderItems(cards);
-  console.log(cards);
-});
-fetch('http://localhost:3000/me').then((res) => res.json()).then(profile => {
-  console.log(profile)
-  author.textContent = profile.name;
-  job.textContent = profile.about;
-  avatarImg.src = profile.avatar;
-}
-);

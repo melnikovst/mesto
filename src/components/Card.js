@@ -1,9 +1,19 @@
+import Api from "./Api";
+
+const deleteFromServer = new Api ({
+  url: 'https://mesto.nomoreparties.co/v1/cohort-33',
+  headers: {
+    authorization: 'f5c43062-fa6e-4cd2-82d1-ae866fc3359c',
+    'Content-Type': 'application/json'
+  }
+});
 export class Card {
-  constructor(initialCards, cardSelector, handleCardClick) {
-    this._name = initialCards.name;
-    this._link = initialCards.link;
+  constructor(obj, cardSelector, handleCardClick) {
+    this._name = obj.name;
+    this._link = obj.link;
     this._cardTemplate = cardSelector;
     this._handleCardClick = handleCardClick;
+    this._obj = obj;
   }
 
   _getElement() {
@@ -28,7 +38,10 @@ export class Card {
       this._handleLike();
     });
     this._item.querySelector('.card__delete-button').addEventListener('click', () => {
-      this._handleDeleting();
+      deleteFromServer.deleteCard(this._obj).then(res => res.json()).then(() => {
+        console.log(this._obj);
+        this._handeDeleting();
+      })
     });
     this._item.querySelector('.card__image').addEventListener('click', () => {
       this._handleCardClick(this._name, this._link);
@@ -39,7 +52,7 @@ export class Card {
     this._likeButton.classList.toggle('card__button_active');
   }
 
-  _handleDeleting() {
+  _handeDeleting() {
     this._item.remove();
     this._item = null;
   }
