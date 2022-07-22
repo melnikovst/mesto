@@ -1,19 +1,11 @@
-import Api from "./Api";
-
-const deleteFromServer = new Api ({
-  url: 'https://mesto.nomoreparties.co/v1/cohort-33',
-  headers: {
-    authorization: 'f5c43062-fa6e-4cd2-82d1-ae866fc3359c',
-    'Content-Type': 'application/json'
-  }
-});
 export class Card {
-  constructor(obj, cardSelector, handleCardClick) {
+  constructor(obj, cardSelector, handleCardClick, deleteCardThroughApi) {
     this._name = obj.name;
     this._link = obj.link;
     this._cardTemplate = cardSelector;
     this._handleCardClick = handleCardClick;
     this._obj = obj;
+    this._deleting = deleteCardThroughApi;
   }
 
   _getElement() {
@@ -38,10 +30,7 @@ export class Card {
       this._handleLike();
     });
     this._item.querySelector('.card__delete-button').addEventListener('click', () => {
-      deleteFromServer.deleteCard(this._obj).then(res => res.json()).then(() => {
-        console.log(this._obj);
-        this._handeDeleting();
-      })
+      this._deleting(this._obj, this._handeDeleting());
     });
     this._item.querySelector('.card__image').addEventListener('click', () => {
       this._handleCardClick(this._name, this._link);

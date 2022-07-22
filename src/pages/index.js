@@ -1,5 +1,5 @@
 import {
-  author, job, initialCards,
+  author, job,
   buttonOpenPopupProfileEdit, popupProfile, cardTemplateContainer,
   cardEditor, cardPopupBtn,
   popupsList, bigImgPopup, settings, formValidators, avatarImg
@@ -12,6 +12,7 @@ import { Section } from "../components/Section.js";
 import { UserInfo } from "../components/UserInfo.js";
 import './index.css';
 import Api from "../components/Api.js";
+import { Avatar } from "../components/Avatar.js";
 const enableValidation = (config) => {
   const forms = Array.from(document.querySelectorAll(config.formSelector))
   forms.forEach((formElement) => {
@@ -22,6 +23,14 @@ const enableValidation = (config) => {
   });
 };
 
+const popupAvatar = document.querySelector('.popup_type_avatar');
+
+const changeAvatar = (obj) => {
+  server.setNewAvatar(obj).then(res => res.json()).then(link => {
+    console.log(link);
+    setInfo.setUserAvatar(link)
+  })
+}
 enableValidation(settings);
 
 const handleCardClick = (name, link) => {
@@ -36,19 +45,20 @@ const renderCards = new Section({
 }, cardTemplateContainer);
 
 const createCard = (cardElement) => {
-  const card = new Card(cardElement, '#card-template', handleCardClick);
+  const card = new Card(cardElement, '#card-template', handleCardClick, deleteCardThroughApi);
   const cardItem = card.generateCard();
   return cardItem;
 };
 
 const editCardSubmitHandler = (obj) => {
+  console.log(obj);
   server.addCard(obj)
-  .then(res => res.json())
-  .then(item => {
-    console.log(item);
-    renderCards.addItem(createCard(item));
-    addCardPopup.close();
-  })
+    .then(res => res.json())
+    .then(item => {
+      console.log(item);
+      renderCards.addItem(createCard(item));
+      addCardPopup.close();
+    })
 };
 
 const setCardListener = () => {
@@ -62,11 +72,11 @@ const preloadAnimationCanceling = () => {
 
 const handleProfileFormSubmit = (obj) => {
   server.changeProfile(obj)
-  .then(res => res.json())
-  .then(submit => {
-    console.log(submit)
-    setInfo.setUserInfo(submit);
-  }).catch(err => console.log(err));
+    .then(res => res.json())
+    .then(submit => {
+      console.log(submit)
+      setInfo.setUserInfo(submit);
+    }).catch(err => console.log(err));
 };
 
 const openProfilePopup = () => {
@@ -78,7 +88,7 @@ const openProfilePopup = () => {
   profilePopup.open();
 };
 
-const server = new Api ({
+const server = new Api({
   url: 'https://mesto.nomoreparties.co/v1/cohort-33',
   headers: {
     authorization: 'f5c43062-fa6e-4cd2-82d1-ae866fc3359c',
@@ -86,6 +96,9 @@ const server = new Api ({
   }
 });
 
+const deleteCardThroughApi = (object, someFunction) => {
+  server.deleteCard(object).then(res => res.json()).then(() => someFunction);
+}
 
 server.loadCards().then(res => res.json()).then(cards => {
   console.log(cards);
@@ -100,15 +113,18 @@ server.loadProfile().then(res => res.json()).then(profile => {
 
 const profilePopup = new PopupWithForm(popupProfile, handleProfileFormSubmit);
 const addCardPopup = new PopupWithForm(cardEditor, editCardSubmitHandler);
+const avatarPopup = new PopupWithForm(popupAvatar, changeAvatar)
 const imgPopup = new PopupWithImage(bigImgPopup);
 const setInfo = new UserInfo({
   profileName: author,
-  profileDescription: job
+  profileDescription: job,
+  profileAvatar: avatarImg
 });
 imgPopup.setEventListeners();
-
+avatarPopup.setEventListeners();
 profilePopup.setEventListeners();
 addCardPopup.setEventListeners();
 window.addEventListener('DOMContentLoaded', preloadAnimationCanceling);
 cardPopupBtn.addEventListener('click', setCardListener);
 buttonOpenPopupProfileEdit.addEventListener('click', openProfilePopup);
+avatarImg.addEventListener('click', () => { avatarPopup.open() })

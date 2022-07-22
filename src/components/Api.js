@@ -1,4 +1,3 @@
-
 export default class Api {
     constructor({ url, headers }) {
         this._url = url;
@@ -49,6 +48,17 @@ export default class Api {
             headers: this._headers,
         })
         return this._deletedCard;
+    }
+
+    setNewAvatar(obj) {
+        this._newAvatar = fetch(`${this._url}/users/me/avatar`, {
+            method: 'PATCH',
+            headers: this._headers,
+            body: JSON.stringify({
+                avatar: obj.avatar
+            })
+        })
+        return this._newAvatar;
     }
 }
 
