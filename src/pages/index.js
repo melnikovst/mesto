@@ -2,7 +2,7 @@ import {
   author, job,
   buttonOpenPopupProfileEdit, popupProfile, cardTemplateContainer,
   cardEditor, cardPopupBtn,
-  popupsList, bigImgPopup, settings, formValidators, avatarImg
+  popupsList, bigImgPopup, settings, formValidators, avatarImg, buttonOpenPopupAvatar
 } from "../utils/variables.js";
 import { FormValidator } from "../components/FormValidator.js";
 import { Card } from "../components/Card.js";
@@ -45,7 +45,7 @@ const renderCards = new Section({
 }, cardTemplateContainer);
 
 const createCard = (cardElement) => {
-  const card = new Card(cardElement, '#card-template', handleCardClick, deleteCardThroughApi);
+  const card = new Card(cardElement, '#card-template', handleCardClick, deleteCardThroughApi, setInfo.getUserId(), putLikeThroughApi);
   const cardItem = card.generateCard();
   return cardItem;
 };
@@ -55,7 +55,6 @@ const editCardSubmitHandler = (obj) => {
   server.addCard(obj)
     .then(res => res.json())
     .then(item => {
-      console.log(item);
       renderCards.addItem(createCard(item));
       addCardPopup.close();
     })
@@ -100,15 +99,16 @@ const deleteCardThroughApi = (object, someFunction) => {
   server.deleteCard(object).then(res => res.json()).then(() => someFunction);
 }
 
+const putLikeThroughApi = (object, someFunction) => {
+  server.putLike(object).then(res => res.json()).then(() => someFunction);
+}
+
 server.loadCards().then(res => res.json()).then(cards => {
-  console.log(cards);
   renderCards.renderItems(cards);
 })
 
 server.loadProfile().then(res => res.json()).then(profile => {
-  author.textContent = profile.name;
-  job.textContent = profile.about;
-  avatarImg.src = profile.avatar;
+  setInfo.setUserInfo(profile)
 })
 
 const profilePopup = new PopupWithForm(popupProfile, handleProfileFormSubmit);
@@ -119,7 +119,8 @@ const setInfo = new UserInfo({
   profileName: author,
   profileDescription: job,
   profileAvatar: avatarImg
-});
+}, server.getProfileId());
+
 imgPopup.setEventListeners();
 avatarPopup.setEventListeners();
 profilePopup.setEventListeners();
@@ -127,4 +128,9 @@ addCardPopup.setEventListeners();
 window.addEventListener('DOMContentLoaded', preloadAnimationCanceling);
 cardPopupBtn.addEventListener('click', setCardListener);
 buttonOpenPopupProfileEdit.addEventListener('click', openProfilePopup);
-avatarImg.addEventListener('click', () => { avatarPopup.open() })
+buttonOpenPopupAvatar.addEventListener('click', () => {
+  avatarPopup.open();
+  console.log(server.getId())
+})
+
+

@@ -1,6 +1,6 @@
 import { Popup } from "./Popup";
 
-export class Avatar extends Popup {
+export class PopupWithSubmit extends Popup {
     constructor(popup) {
         super(popup);
         this._form = this._item.querySelector('.form');

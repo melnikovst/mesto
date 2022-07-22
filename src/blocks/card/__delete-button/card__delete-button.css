@@ -12,6 +12,7 @@
     border: none;
     transition: all 0.2s ease;
     z-index: 1;
+    display: block;
 }
 
 .card__delete-button:hover {

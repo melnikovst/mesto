@@ -8,8 +8,9 @@ export const cardPopupBtn = document.querySelector('.profile__button');
 export const bigImgPopup = document.querySelector('.popup_type_picture');
 export const formsList = Array.from(document.querySelectorAll('.form'));
 export const popupsList = Array.from(document.querySelectorAll('.popup'));
-export const formValidators = {}
-export const avatarImg = document.querySelector('.profile__image')
+export const formValidators = {};
+export const avatarImg = document.querySelector('.profile__image');
+export const buttonOpenPopupAvatar = document.querySelector('.profile__icon_type_pencil');
 
 export const initialCards = [
   {

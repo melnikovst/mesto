@@ -17,7 +17,10 @@
         <main class="content">
             <section class="profile">
                 <div class="profile__wrapper">
-                    <img src="#" alt="Фото профиля" class="profile__image profile_avatar_vektor">
+                    <div class="profile__avatar-container">
+                        <img src="#" alt="Фото профиля" class="profile__image">
+                        <div class="profile__icon_type_pencil"></div>
+                    </div>
                     <div class="profile__text-wrapper">
                         <div class="profile__title-container">
                             <h1 class="profile__title"></h1>
@@ -43,7 +46,10 @@
                             alt="Изображение в карточке" class="card__image">
                         <div class="card__title-wrapper">
                             <h2 class="card__title"></h2>
-                            <button type="button" aria-label="Лайк" class="card__button"></button>
+                            <div class="card__likes_container_wrapper">
+                                <button type="button" aria-label="Лайк" class="card__button"></button>
+                                <p class="card__like_amount">5</p>
+                            </div>
                         </div>
                     </article>
                 </template>
