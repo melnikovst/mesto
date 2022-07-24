@@ -1,10 +1,10 @@
 export class UserInfo {
-    constructor({ profileName , profileDescription, profileAvatar }, id) {
+    constructor({ profileName , profileDescription, profileAvatar }, profileData) {
         this._profileName = profileName;
         this._description = profileDescription;
         this._profileAvatar = profileAvatar;
         this._obj = {};
-        this._id = id.then(profile => this._id = profile);
+        this._profileData = profileData.then(profile => this._profileData = profile);
     }
 
     getUserInfo() {
@@ -17,17 +17,13 @@ export class UserInfo {
     }
 
     getUserId() {
-        return this._id;
+        return this._profileData;
     }
 
-    saveId() {
-        return 
-    }
-
-    setUserInfo(obj) {
-        this._profileName.textContent = obj.name;
-        this._description.textContent = obj.about;
-        this._profileAvatar.src = obj.avatar
+    setUserInfo() {
+        this._profileName.textContent = this._profileData.name;
+        this._description.textContent = this._profileData.about;
+        this._profileAvatar.src = this._profileData.avatar
     }
 
     setUserAvatar(obj) {

@@ -28,15 +28,16 @@ export default class Api {
         this._like = fetch(`${this._url}/cards/${obj._id}/likes`, {
             method: 'PUT',
             headers: this._headers,
-        })
+        }).then(res => res.json())
         return this._like;
     }
 
     deleteLike(obj) {
-        return fetch(`${this._url}/cards/${obj._id}`, {
+        this._deleteLike = fetch(`${this._url}/cards/${obj._id}/likes`, {
             method: 'DELETE',
             headers: this._headers,
-        })
+        }).then(res => res.json());
+        return this._deleteLike;
     }
 
     changeProfile(obj) {
@@ -80,13 +81,6 @@ export default class Api {
             })
         })
         return this._newAvatar;
-    }
-    getLikesArray(obj) {
-        this._likesArray = fetch(`${this._url}/cards/${obj._id}/likes`, {
-            method: 'PUT',
-            headers: this._headers,
-        })
-        return this._likesArray;
     }
 }
 
