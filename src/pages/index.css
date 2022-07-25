@@ -71,3 +71,16 @@
 @import url(../blocks/form/__invalid-message/form__invalid-message.css);
 @import url(../blocks/form/__invalid-message/_active/form__invalid-message_active.css);
 @import url(../blocks/form/__button/_disabled/form__button_disabled.css);
+
+/* SUBSTRATE */
+
+@import url(../blocks/substrate/substrate.css);
+@import url(../blocks/substrate/_while_loading/substrate_while_loading.css);
+@import url(../blocks/substrate/__container/substrate__container.css);
+@import url(../blocks/substrate/__letter/substrate__letter.css);
+@import url(../blocks/substrate/__letter/_size_large/substrate__letter_size_large.css);
+@import url(../blocks/substrate/_active/substrate_active.css);
+
+/* ANIMATIONS */
+
+@import url(../blocks/breathing/breathing.css);

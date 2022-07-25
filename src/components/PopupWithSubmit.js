@@ -1,22 +1,30 @@
 import { Popup } from "./Popup";
 
 export class PopupWithSubmit extends Popup {
-    constructor(popup) {
+    constructor(popup, submitHandler) {
         super(popup);
-        this._form = this._item.querySelector('.form');
-        this._input = this._form.querySelector('.form__input');
+        this._form = document.querySelector('#submit-form');
         this._formBtn = this._form.querySelector('.form__button');
         this._avatarImage = document.querySelector('.profile__image');
+        this._submitHandler = submitHandler;
     }
-    getValue() {
-        return {
-            avatar: this._input.value
-        }
+
+    getCardObject(obj) {
+        this._obj = obj;
     }
+
+    _handle(evt) {
+        evt.preventDefault();
+        console.log(this._formBtn);
+    }
+
     setListeners() {
+        console.log(this._form);
         super.setEventListeners();
-        this._avatarImage.addEventListener('click', () => {
-            this.open();
+        this._form.addEventListener('submit', (evt) => {
+            evt.preventDefault();
+            this._submitHandler(this._obj);
+            this.close();
         });
     }
 }

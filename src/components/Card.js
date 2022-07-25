@@ -1,19 +1,19 @@
 export class Card {
-  constructor(obj, cardSelector, handleCardClick, deleteCardThroughApi, id, putLike, deleteLike) {
-    this._name = obj.name;
+  constructor(obj, cardSelector, handleCardClick, handleTrashImg, {userId}, putLike, deleteLike) {
+    this._name = obj.way;
     this._link = obj.link;
     this._cardTemplate = cardSelector;
     this._handleCardClick = handleCardClick;
     this._obj = obj;
-    this._deleting = deleteCardThroughApi;
+    this._deleting = handleTrashImg;
     this._cardOwner = obj.owner._id;
-    this._item = this._getElement();
-    this._likeButton = this._item.querySelector('.card__button');
-    this._deletingBtn = this._item.querySelector('.card__delete-button');
-    this._myId = id;
-    this._id = this._myId._id;
+    this._id = userId;
     this._putLikeWithApi = putLike;
     this._deleteLikeWithApi = deleteLike;
+  }
+
+  sendCard() {
+    return this._obj;
   }
 
   _getElement() {
@@ -22,15 +22,18 @@ export class Card {
   }
 
   generateCard() {
+    this._item = this._getElement();
+    this._likeButton = this._item.querySelector('.card__button');
+    this._deletingBtn = this._item.querySelector('.card__delete-button');
     if (this._id !== this._cardOwner) {
       this._deletingBtn.style.display = 'none';
     }
     this._likesCount = this._item.querySelector('.card__like_amount');
     this._cardImg = this._item.querySelector('.card__image');
     this._cardTitle = this._item.querySelector('.card__title');
-    this._cardTitle.textContent = this._name;
-    this._cardImg.src = this._link;
-    this._cardImg.alt = this._name;
+    this._cardTitle.textContent = this._obj.name;
+    this._cardImg.src = this._obj.link;
+    this._cardImg.alt = this._obj.name;
     this._setListeners();
     this._checkMyOwnLikes();
     return this._item;
@@ -40,9 +43,12 @@ export class Card {
 
     this._likeButton.addEventListener('click', () => {
       this._handleLike();
+      console.log(this._id);
+      console.log(this._obj.owner._id);
     });
     this._item.querySelector('.card__delete-button').addEventListener('click', () => {
-      this._deleting(this._obj, this._handeDeleting());
+      console.log(this);
+      this._deleting(this);
     });
     this._item.querySelector('.card__image').addEventListener('click', () => {
       this._handleCardClick(this._name, this._link);
@@ -51,21 +57,17 @@ export class Card {
   }
 
   _handleLike() {
-        if (this._checkLikesArray()) {
-          this._deleteLikeWithApi(this._obj).then(res => {
-            this._obj = res;
-            this._checkMyOwnLikes()
-          })
-        } if (!this._checkLikesArray()) {
-          this._putLikeWithApi(this._obj).then(res => {
-            this._obj = res;
-            this._checkMyOwnLikes()
-          })
-        }
-  }
-
-  _toggleLike() {
-    this._likeButton.classList.toggle('card__button_active');
+    if (this._checkLikesArray()) {
+      this._deleteLikeWithApi(this._obj).then(res => {
+        this._obj = res;
+        this._checkMyOwnLikes()
+      })
+    } if (!this._checkLikesArray()) {
+      this._putLikeWithApi(this._obj).then(res => {
+        this._obj = res;
+        this._checkMyOwnLikes()
+      })
+    }
   }
 
   _sendLike() {
@@ -76,7 +78,7 @@ export class Card {
     this._likeButton.classList.remove('card__button_active');
   }
 
-  _handeDeleting() {
+  handeDeleting() {
     this._item.remove();
     this._item = null;
   }
@@ -92,7 +94,7 @@ export class Card {
   }
 
   _checkLikesArray() {
-    return this._obj.likes.some(id => id._id === this._id) 
+    return this._obj.likes.some(id => id._id === this._id)
   }
 
   _checkLikes() {

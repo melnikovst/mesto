@@ -11,30 +11,31 @@ export const popupsList = Array.from(document.querySelectorAll('.popup'));
 export const formValidators = {};
 export const avatarImg = document.querySelector('.profile__image');
 export const buttonOpenPopupAvatar = document.querySelector('.profile__icon_type_pencil');
+export const errorLoader = document.querySelector('#errorAnimation');
 
 export const initialCards = [
   {
-    name: 'Архыз',
+    way: 'Архыз',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
   },
   {
-    name: 'Челябинская область',
+    way: 'Челябинская область',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
   },
   {
-    name: 'Иваново',
+    way: 'Иваново',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
   },
   {
-    name: 'Камчатка',
+    way: 'Камчатка',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
   },
   {
-    name: 'Холмогорский район',
+    way: 'Холмогорский район',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
   },
   {
-    name: 'Байкал',
+    way: 'Байкал',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];

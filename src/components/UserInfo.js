@@ -3,8 +3,7 @@ export class UserInfo {
         this._profileName = profileName;
         this._description = profileDescription;
         this._profileAvatar = profileAvatar;
-        this._obj = {};
-        this._profileData = profileData.then(profile => this._profileData = profile);
+        this._profileData = profileData;
     }
 
     getUserInfo() {
@@ -17,13 +16,13 @@ export class UserInfo {
     }
 
     getUserId() {
-        return this._profileData;
+        return this._profileData._id;
     }
 
-    setUserInfo() {
-        this._profileName.textContent = this._profileData.name;
-        this._description.textContent = this._profileData.about;
-        this._profileAvatar.src = this._profileData.avatar
+    setUserInfo(obj) {
+        this._profileName.textContent = obj.name;
+        this._description.textContent = obj.about;
+        this._profileAvatar.src = obj.avatar
     }
 
     setUserAvatar(obj) {

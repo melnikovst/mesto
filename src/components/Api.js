@@ -7,14 +7,24 @@ export default class Api {
     loadCards() {
         this._cards = fetch(`${this._url}/cards`, {
             headers: this._headers
-        })
+        }).then(res => {
+            if (res.ok) {
+               return res.json()
+            }
+            return Promise.reject(`Ошибка: ${res.status}`);
+        });
         return this._cards;
     }
 
     loadProfile() {
         this._profileInfo = fetch(`${this._url}/users/me`, {
             headers: this._headers
-        })
+        }).then(res => {
+            if (res.ok) {
+                return res.json()
+            }
+            return Promise.reject(`Ошибка: ${res.status}`);
+        });
         return this._profileInfo;
     }
 
@@ -28,7 +38,12 @@ export default class Api {
         this._like = fetch(`${this._url}/cards/${obj._id}/likes`, {
             method: 'PUT',
             headers: this._headers,
-        }).then(res => res.json())
+        }).then(res => {
+            if (res.ok) {
+                return res.json()
+            }
+            return Promise.reject(`Ошибка: ${res.status}`);
+        });
         return this._like;
     }
 
@@ -36,7 +51,12 @@ export default class Api {
         this._deleteLike = fetch(`${this._url}/cards/${obj._id}/likes`, {
             method: 'DELETE',
             headers: this._headers,
-        }).then(res => res.json());
+        }).then(res => {
+            if (res.ok) {
+                return res.json()
+            }
+            return Promise.reject(`Ошибка: ${res.status}`);
+        });
         return this._deleteLike;
     }
 
@@ -60,7 +80,7 @@ export default class Api {
                 name: obj.name,
                 link: obj.link
             })
-        })
+        }).then(res => res.json())
         return this._addedCard;
     }
 

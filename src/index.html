@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mesto</title>
 </head>
-<!-- <%=require('./images/image.png')%> -->
 
 <body class="root">
     <div class="page">
@@ -110,7 +109,7 @@
                 <button type="button" aria-label="Закрыть всплывающее окно"
                     class="popup__button-escape popup__button-escape_avatar"></button>
                 <h2 class="popup__title">Обновить аватар</h2>
-                <form name="avatar-form" class="form form_popup_template" novalidate>
+                <form name="avatar-form" class="form form_popup_avatar" novalidate>
                     <fieldset class="form__fieldset">
                         <input type="url" class="form__input form__input_type-name" name="form-name" id="avatar"
                             placeholder="Ссылка на картинку" required minlength="2">
@@ -118,6 +117,51 @@
                     </fieldset>
                     <button type="submit" id="avatar-button" aria-label="Создать" class="form__button">Создать</button>
                 </form>
+            </div>
+        </div>
+
+        <div class="popup popup_type_submit">
+            <div class="popup__container">
+                <button type="button" aria-label="Закрыть всплывающее окно"
+                    class="popup__button-escape popup__button-escape_avatar"></button>
+                <h2 class="popup__title">Вы уверены?</h2>
+                <form name="avatar-form" class="form form_popup_submit" id="submit-form" novalidate>
+                    <button type="submit" id="submit-popup-button" aria-label="Создать" class="form__button">Да</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="substrate substrate_while_loading">
+            <div class="substrate__container">
+                <p class="substrate__letter">l</p>
+                <p class="substrate__letter">o</p>
+                <p class="substrate__letter">a</p>
+                <p class="substrate__letter">d</p>
+                <p class="substrate__letter">i</p>
+                <p class="substrate__letter">n</p>
+                <p class="substrate__letter">g</p>
+            </div>
+        </div>
+
+        <div class="substrate" id="errorAnimation">
+            <div class="substrate__wrapper">
+                <div class="substrate__container">
+                    <p class="substrate__letter substrate__letter_size_large">4</p>
+                    <p class="substrate__letter substrate__letter_size_large">0</p>
+                    <p class="substrate__letter substrate__letter_size_large">4</p>
+                </div>
+                <div class="substrate__container">
+                    <p class="substrate__letter">n</p>
+                    <p class="substrate__letter">o</p>
+                    <p class="substrate__letter">t</p>
+                </div>
+                <div class="substrate__container">
+                    <p class="substrate__letter">f</p>
+                    <p class="substrate__letter">o</p>
+                    <p class="substrate__letter">u</p>
+                    <p class="substrate__letter">n</p>
+                    <p class="substrate__letter">d</p>
+                </div>
             </div>
         </div>
 
