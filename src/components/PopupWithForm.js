@@ -26,16 +26,17 @@ export class PopupWithForm extends Popup {
 
     _handleState(e) {
         e.preventDefault();
-        this._formBtn.textContent = 'Сохранение...';
         this._formBtn.disabled = true;
         this._obj = this._getInputValues();
-        console.log(this._submitHandler(this._obj));
+        this._formBtn.textContent = 'Сохранение...';
+        console.log(this._obj);
         this._submitHandler(this._obj).then(() => {
-            console.log(this._submitHandler(this._obj));
             this.close();
         }).finally(() => {
-            this._formBtn.disabled = false;
-            this._formBtn.textContent = 'Сохранить';
+            setTimeout(() => {
+                this._formBtn.disabled = false;
+                this._formBtn.textContent = 'Сохранить';
+            }, 500)
         });
     }
 
@@ -43,7 +44,6 @@ export class PopupWithForm extends Popup {
         super.setEventListeners();
         this._item.addEventListener('submit', (e) => {
             this._handleState(e);
-            console.log(this._submitHandler(this._obj));
         })
     }
     

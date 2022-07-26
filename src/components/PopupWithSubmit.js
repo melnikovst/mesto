@@ -13,14 +13,11 @@ export class PopupWithSubmit extends Popup {
         this._obj = obj;
     }
 
-    _handle(evt) {
-        evt.preventDefault();
-        console.log(this._formBtn);
-    }
-
     setListeners() {
         console.log(this._form);
         super.setEventListeners();
+        this._formBtn.classList.remove('.form__button_disabled');
+        this._formBtn.disabled = false;
         this._form.addEventListener('submit', (evt) => {
             evt.preventDefault();
             this._submitHandler(this._obj);

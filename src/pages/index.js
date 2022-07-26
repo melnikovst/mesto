@@ -15,9 +15,9 @@ import Api from "../components/Api.js";
 import { PopupWithSubmit } from "../components/PopupWithSubmit.js";
 
 const server = new Api({
-  url: 'https://mesto.nomoreparties.co/v1/cohort-33',
+  url: 'https://mesto.nomoreparties.co/v1/cohort-47',
   headers: {
-    authorization: 'f5c43062-fa6e-4cd2-82d1-ae866fc3359c',
+    authorization: '12b2cd52-5967-45db-990f-351ecb43e60e',
     'Content-Type': 'application/json'
   }
 });
@@ -35,7 +35,7 @@ const enableValidation = (config) => {
 const popupAvatar = document.querySelector('.popup_type_avatar');
 
 const changeAvatar = (obj) => {
-  server.setNewAvatar(obj).then(res => res.json()).then(link => {
+  return server.setNewAvatar(obj).then(link => {
     profileowner.setUserAvatar(link)
   })
 }
@@ -52,16 +52,19 @@ const handleTrashImg = (object) => {
 
 const popupDeleting = document.querySelector('.popup_type_submit');
 
-
-
 const editCardSubmitHandler = (obj) => {
-  console.log(obj);
-  server.addCard(obj)
+  return server.addCard(obj)
     .then(item => {
       renderCards.addItem(createCard(item));
-      addCardPopup.close();
     })
 };
+
+const renderCards = new Section({
+  renderer: cardElement => {
+    const card = createCard(cardElement)
+    renderCards.addItem(card);
+  }
+}, cardTemplateContainer);
 
 const createCard = (cardElement) => {
   const card = new Card(cardElement, '#card-template', handleCardClick, handleTrashImg, { userId: profileowner.getUserId() }, putLikeThroughApi,
@@ -80,12 +83,10 @@ const preloadAnimationCanceling = () => {
 };
 
 const handleProfileFormSubmit = (obj) => {
-  server.changeProfile(obj)
-    .then(res => res.json())
-/*     .then((res) => {
+  return server.changeProfile(obj)
+    .then((res) => {
       profileowner.setUserInfo(res);
-      console.log(res);
-    }).catch(err => console.log(err)); */
+    }).catch(err => console.log(err));
 };
 
 const openProfilePopup = () => {
@@ -101,7 +102,7 @@ const handleAvatarOpening = () => {
   formValidators['avatar-form'].resetValidation();
   formValidators['avatar-form'].disableButton();
   avatarPopup.open();
-  console.log(deletePopup)
+  console.log(profileowner.sendProfile())
 }
 
 const deleteCardThroughApi = (object) => {
@@ -115,13 +116,6 @@ const deleteLikeThroughApi = (object) => {
 const putLikeThroughApi = (object) => {
   return server.putLike(object)
 }
-
-const renderCards = new Section({
-  renderer: cardElement => {
-    const card = createCard(cardElement)
-    renderCards.addItem(card);
-  }
-}, cardTemplateContainer);
 
 let profileowner;
 const profilePopup = new PopupWithForm(popupProfile, handleProfileFormSubmit);

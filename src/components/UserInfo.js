@@ -8,8 +8,8 @@ export class UserInfo {
 
     getUserInfo() {
         this._object = {
-            author: this._profileName.textContent,
-            description: this._description.textContent,
+            name: this._profileName.textContent,
+            about: this._description.textContent,
             avatar: this._profileAvatar.src
         };
         return this._object;
@@ -23,6 +23,10 @@ export class UserInfo {
         this._profileName.textContent = obj.name;
         this._description.textContent = obj.about;
         this._profileAvatar.src = obj.avatar
+    }
+
+    sendProfile() {
+        return this._profileData;
     }
 
     setUserAvatar(obj) {

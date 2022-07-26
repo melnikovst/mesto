@@ -1,6 +1,6 @@
 export class Card {
-  constructor(obj, cardSelector, handleCardClick, handleTrashImg, {userId}, putLike, deleteLike) {
-    this._name = obj.way;
+  constructor(obj, cardSelector, handleCardClick, handleTrashImg, { userId }, putLike, deleteLike) {
+    this._name = obj.name;
     this._link = obj.link;
     this._cardTemplate = cardSelector;
     this._handleCardClick = handleCardClick;
@@ -43,8 +43,7 @@ export class Card {
 
     this._likeButton.addEventListener('click', () => {
       this._handleLike();
-      console.log(this._id);
-      console.log(this._obj.owner._id);
+      console.log(this._obj.owner._id); //console.log(), чтобы воровать токен одногруппников
     });
     this._item.querySelector('.card__delete-button').addEventListener('click', () => {
       console.log(this);
@@ -97,7 +96,4 @@ export class Card {
     return this._obj.likes.some(id => id._id === this._id)
   }
 
-  _checkLikes() {
-    this._test(this._obj)
-  };
 }

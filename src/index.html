@@ -65,11 +65,11 @@
                 <form novalidate name="profile-form" class="form form_type_profile">
                     <fieldset class="form__fieldset">
                         <input type="text" class="form__input form__input_type_name" name="name" required minlength="2"
-                            maxlength="40" placeholder="Ваше имя" id="author">
-                        <span class="form__invalid-message author-error"></span>
+                            maxlength="40" placeholder="Ваше имя" id="name">
+                        <span class="form__invalid-message name-error"></span>
                         <input type="text" class="form__input form__input_type_job" name="about"
-                            placeholder="Ваш род деятельности" minlength="2" maxlength="200" id="description" required>
-                        <span class="form__invalid-message description-error"></span>
+                            placeholder="Ваш род деятельности" minlength="2" maxlength="200" id="about" required>
+                        <span class="form__invalid-message about-error"></span>
                     </fieldset>
                     <button type="submit" aria-label="Сохранить" id="profile-button"
                         class="form__button">Сохранить</button>

@@ -65,10 +65,10 @@ export default class Api {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
-                name: obj.author,
-                about: obj.description
+                name: obj.name,
+                about: obj.about
             })
-        });
+        }).then(res => res.json());
         return this._changedProfile;
     }
 
@@ -99,7 +99,7 @@ export default class Api {
             body: JSON.stringify({
                 avatar: obj.avatar
             })
-        })
+        }).then(res => res.json());
         return this._newAvatar;
     }
 }
