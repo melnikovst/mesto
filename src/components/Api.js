@@ -9,7 +9,7 @@ export default class Api {
             headers: this._headers
         }).then(res => {
             if (res.ok) {
-               return res.json()
+                return res.json()
             }
             return Promise.reject(`Ошибка: ${res.status}`);
         });
@@ -31,7 +31,12 @@ export default class Api {
     getProfileId() {
         return this.test = fetch(`${this._url}/users/me`, {
             headers: this._headers
-        }).then(res => res.json());
+        }).then(res => {
+            if (res.ok) {
+                return res.json()
+            }
+            return Promise.reject(`Ошибка: ${res.status}`);
+        });
     }
 
     putLike(obj) {
@@ -68,7 +73,12 @@ export default class Api {
                 name: obj.name,
                 about: obj.about
             })
-        }).then(res => res.json());
+        }).then(res => {
+            if (res.ok) {
+                return res.json()
+            }
+            return Promise.reject(`Ошибка: ${res.status}`);
+        }).catch(err => { console.log(err) });
         return this._changedProfile;
     }
 
@@ -80,7 +90,12 @@ export default class Api {
                 name: obj.name,
                 link: obj.link
             })
-        }).then(res => res.json())
+        }).then(res => {
+            if (res.ok) {
+                return res.json()
+            }
+            return Promise.reject(`Ошибка: ${res.status}`);
+        });
         return this._addedCard;
     }
 
@@ -99,7 +114,12 @@ export default class Api {
             body: JSON.stringify({
                 avatar: obj.avatar
             })
-        }).then(res => res.json());
+        }).then(res => {
+            if (res.ok) {
+                return res.json()
+            }
+            return Promise.reject(`Ошибка: ${res.status}`);
+        }).catch(err => { console.log(err) });
         return this._newAvatar;
     }
 }

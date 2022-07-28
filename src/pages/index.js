@@ -24,7 +24,7 @@ const server = new Api({
 
 const enableValidation = (config) => {
   const forms = Array.from(document.querySelectorAll(config.formSelector))
-  forms.forEach((formElement) => {
+  forms.forEach(formElement => {
     const validator = new FormValidator(config, formElement)
     const formName = formElement.getAttribute('name')
     formValidators[formName] = validator;
@@ -35,10 +35,12 @@ const enableValidation = (config) => {
 const popupAvatar = document.querySelector('.popup_type_avatar');
 
 const changeAvatar = (obj) => {
-  return server.setNewAvatar(obj).then(link => {
-    profileowner.setUserAvatar(link)
-  })
+  return server.setNewAvatar(obj)
+    .then(link => {
+      profileowner.setUserAvatar(link)
+    }).catch(err => { console.log(err) })
 }
+
 enableValidation(settings);
 
 const handleCardClick = (name, link) => {
@@ -106,7 +108,9 @@ const handleAvatarOpening = () => {
 }
 
 const deleteCardThroughApi = (object) => {
-  server.deleteCard(object.sendCard()).then(res => res.json()).then(() => { object.handeDeleting() });
+  server.deleteCard(object.sendCard())
+    .then(res => res.json())
+    .then(() => { object.handeDeleting() });
 }
 
 const deleteLikeThroughApi = (object) => {
@@ -136,18 +140,18 @@ buttonOpenPopupAvatar.addEventListener('click', handleAvatarOpening);
 
 const loading = document.querySelector('.substrate')
 
-Promise.all([server.loadProfile(), server.loadCards()]).then((value) => {
-  /* throw err */
-  profileowner = new UserInfo({
-    profileName: author,
-    profileDescription: job,
-    profileAvatar: avatarImg
-  }, value[0]);
-  profileowner.setUserInfo(value[0]);
-  renderCards.renderItems(value[1])
-  loading.classList.remove('substrate_while_loading');
-}).catch(() => {
-  loading.classList.remove('substate_while_loading')
-  errorLoader.classList.add('substrate_active');
-})
+Promise.all([server.loadProfile(), server.loadCards()])
+  .then((value) => {
+    profileowner = new UserInfo({
+      profileName: author,
+      profileDescription: job,
+      profileAvatar: avatarImg
+    }, value[0]);
+    profileowner.setUserInfo(value[0]);
+    renderCards.renderItems(value[1])
+    loading.classList.remove('substrate_while_loading');
+  }).catch(() => {
+    loading.classList.remove('substate_while_loading')
+    errorLoader.classList.add('substrate_active');
+  })
 

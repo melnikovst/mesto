@@ -43,9 +43,6 @@ export class Card {
 
     this._likeButton.addEventListener('click', () => {
       this._handleLike();
-      console.log(this._id);
-      console.log(this._obj.owner._id);
-      console.log(this._obj);
     });
     this._item.querySelector('.card__delete-button').addEventListener('click', () => {
       console.log(this);
@@ -53,7 +50,6 @@ export class Card {
     });
     this._item.querySelector('.card__image').addEventListener('click', () => {
       this._handleCardClick(this._name, this._link);
-
     })
   }
 

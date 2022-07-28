@@ -14,9 +14,8 @@ export class PopupWithSubmit extends Popup {
     }
 
     setListeners() {
-        console.log(this._form);
         super.setEventListeners();
-        this._formBtn.classList.remove('.form__button_disabled');
+        this._formBtn.classList.remove('form__button_disabled');
         this._formBtn.disabled = false;
         this._form.addEventListener('submit', (evt) => {
             evt.preventDefault();

@@ -17,7 +17,8 @@
             <section class="profile">
                 <div class="profile__wrapper">
                     <div class="profile__avatar-container">
-                        <img src="#" alt="Фото профиля" class="profile__image">
+                        <div class="spinner"></div>
+                        <img src="#" alt="Что-то пошло не так :(" class="profile__image">
                         <div class="profile__icon_type_pencil"></div>
                     </div>
                     <div class="profile__text-wrapper">
@@ -125,7 +126,7 @@
                 <button type="button" aria-label="Закрыть всплывающее окно"
                     class="popup__button-escape popup__button-escape_avatar"></button>
                 <h2 class="popup__title">Вы уверены?</h2>
-                <form name="avatar-form" class="form form_popup_submit" id="submit-form" novalidate>
+                <form name="submit-form" class="form form_popup_submit" id="submit-form" novalidate>
                     <button type="submit" id="submit-popup-button" aria-label="Создать" class="form__button">Да</button>
                 </form>
             </div>
