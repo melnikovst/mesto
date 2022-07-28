@@ -27,7 +27,6 @@ export class PopupWithForm extends Popup {
     }
 
     _handleState(e) {
-        console.log(this._avatarImg);
         e.preventDefault();
         this._formBtn.disabled = true;
         this._formBtn.textContent = 'Сохранение...';

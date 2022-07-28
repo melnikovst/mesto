@@ -57,7 +57,6 @@ const popupDeleting = document.querySelector('.popup_type_submit');
 const editCardSubmitHandler = (obj) => {
   return server.addCard(obj)
     .then(item => {
-      console.log(obj);
       renderCards.addItem(createCard(item));
     })
 };
@@ -105,7 +104,6 @@ const handleAvatarOpening = () => {
   formValidators['avatar-form'].resetValidation();
   formValidators['avatar-form'].disableButton();
   avatarPopup.open();
-  console.log(profileowner.sendProfile())
 }
 
 const deleteCardThroughApi = (object) => {
