@@ -40,7 +40,6 @@ export class Card {
   }
 
   _setListeners() {
-
     this._likeButton.addEventListener('click', () => {
       this._handleLike();
     });
