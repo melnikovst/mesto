@@ -87,7 +87,7 @@ export default class Api {
             method: 'POST',
             headers: this._headers,
             body: JSON.stringify({
-                name: obj.name,
+                name: obj.title,
                 link: obj.link
             })
         }).then(res => {

@@ -4,12 +4,10 @@
     height: 120px;
     margin: 0px auto;
     border-radius: 50%;
-    display: block;
     top: 0;
     left: 0;
     display: none;
     animation: spinner-circle 0.8s ease-out infinite;
-    border-radius: 50%;
     box-shadow: inset 0 0 0 4px orchid;
     clip: rect(0, 120px, 120px, 0.5em);
 }
