@@ -10,7 +10,7 @@ export const formsList = Array.from(document.querySelectorAll('.form'));
 export const popupsList = Array.from(document.querySelectorAll('.popup'));
 export const formValidators = {};
 export const avatarImg = document.querySelector('.profile__image');
-export const buttonOpenPopupAvatar = document.querySelector('.profile__icon_type_pencil');
+export const buttonOpenPopupAvatar = document.querySelector('.profile__substrate');
 export const errorLoader = document.querySelector('#errorAnimation');
 
 export const settings = {

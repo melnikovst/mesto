@@ -1,4 +1,4 @@
-.profile__icon_type_pencil {
+.profile__substrate {
     background-image: url(../../../images/avatar.svg);
     position: absolute;
     background-position: center;
@@ -14,7 +14,7 @@
     border-radius: 50%;
 }
 
-.profile__icon_type_pencil:hover {
+.profile__substrate:hover {
     opacity: 1;
     cursor: pointer;
 }
