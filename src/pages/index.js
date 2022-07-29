@@ -89,14 +89,14 @@ const createCard = (cardElement) => {
     userId: user,
     putLike: () => {
       return server.putLike(cardElement).then(res => {
-        card._checkMyOwnLikes(res);
-        card._sendLike();
+        card.checkMyOwnLikes(res);
+        card.sendLike();
       })
     },
     deleteLike: () => {
       return server.deleteLike(cardElement).then(res => {
-        card._checkMyOwnLikes(res);
-        card._deleteLike();
+        card.checkMyOwnLikes(res);
+        card.deleteLike();
       })
     }
   });

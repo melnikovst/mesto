@@ -35,7 +35,7 @@ export class Card {
     this._cardImg.src = this._obj.link;
     this._cardImg.alt = this._obj.name;
     this._setListeners();
-    this._checkMyOwnLikes(this._obj);
+    this.checkMyOwnLikes(this._obj);
     return this._item;
   }
 
@@ -59,11 +59,11 @@ export class Card {
     }
   }
 
-  _sendLike() {
+  sendLike() {
     this._likeButton.classList.add('card__button_active');
   }
 
-  _deleteLike() {
+  deleteLike() {
     this._likeButton.classList.remove('card__button_active');
   }
 
@@ -72,13 +72,13 @@ export class Card {
     this._item = null;
   }
 
-  _checkMyOwnLikes(obj) {
+  checkMyOwnLikes(obj) {
     this._likesCount.textContent = obj.likes.length;
     this._result = this._checkLikesArray();
     if (this._result) {
-      this._sendLike();
+      this.sendLike();
     } else {
-      this._deleteLike();
+      this.deleteLike();
     }
   }
 
