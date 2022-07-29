@@ -1,8 +1,8 @@
 import { Popup } from "./Popup.js";
 
 export class PopupWithForm extends Popup {
-    constructor(popup, submitHandler) {
-        super(popup)
+    constructor(popupSelector, submitHandler) {
+        super(popupSelector)
         this._submitHandler = submitHandler;
         this._form = this._item.querySelector('.form');
         this._inputsList = this._form.querySelectorAll('.form__input');
@@ -28,27 +28,19 @@ export class PopupWithForm extends Popup {
 
     _handleState(e) {
         e.preventDefault();
-        this._formBtn.disabled = true;
-        this._formBtn.textContent = 'Сохранение...';
-        this._obj = this._getInputValues();
-        if (this._obj.hasOwnProperty('avatar')) {
-            this._avatarImg.classList.add('profile__image_while_loading');
-            this._spinner.classList.add('spinner_visible');
-        }
-        this._submitHandler(this._obj).then(() => {
-            this.close();
-        }).catch(() => {
-            this._formBtn.textContent = 'Ошибка сервера :('
-        }).finally(() => {
-            if (this._obj.hasOwnProperty('avatar')) {
-                this._spinner.classList.remove('spinner_visible');
-                this._avatarImg.classList.remove('profile__image_while_loading');
-            }
+        this._submitHandler(this._getInputValues());
+    }
+
+    changeButtonState(boolean) {
+        if (boolean) {
+            this._formBtn.disabled = true;
+            this._formBtn.textContent = 'Сохранение...';
+        } else {
             setTimeout(() => {
                 this._formBtn.disabled = false;
                 this._formBtn.textContent = 'Сохранить';
             }, 2000)
-        });
+        }
     }
 
     setEventListeners() {

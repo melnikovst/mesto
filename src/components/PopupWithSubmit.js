@@ -1,15 +1,15 @@
 import { Popup } from "./Popup";
 
 export class PopupWithSubmit extends Popup {
-    constructor(popup, submitHandler) {
-        super(popup);
+    constructor(popupSelector, submitHandler) {
+        super(popupSelector);
         this._form = document.querySelector('#submit-form');
         this._formBtn = this._form.querySelector('.form__button');
         this._avatarImage = document.querySelector('.profile__image');
         this._submitHandler = submitHandler;
     }
 
-    getCardObject(obj) {
+    setCardObject(obj) {
         this._obj = obj;
     }
 

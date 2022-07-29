@@ -1,5 +1,5 @@
 export class Card {
-  constructor(obj, cardSelector, handleCardClick, handleTrashImg, { userId }, putLike, deleteLike) {
+  constructor(obj, cardSelector, handleCardClick, handleTrashImg, { userId, putLike, deleteLike }) {
     this._name = obj.name;
     this._link = obj.link;
     this._cardTemplate = cardSelector;
@@ -25,17 +25,17 @@ export class Card {
     this._item = this._getElement();
     this._likeButton = this._item.querySelector('.card__button');
     this._deletingBtn = this._item.querySelector('.card__delete-button');
-    if (this._id !== this._cardOwner) {
-      this._deletingBtn.style.display = 'none';
-    }
     this._likesCount = this._item.querySelector('.card__like_amount');
     this._cardImg = this._item.querySelector('.card__image');
     this._cardTitle = this._item.querySelector('.card__title');
+    if (this._id !== this._cardOwner) {
+      this._deletingBtn.style.display = 'none';
+    }
     this._cardTitle.textContent = this._obj.name;
     this._cardImg.src = this._obj.link;
     this._cardImg.alt = this._obj.name;
     this._setListeners();
-    this._checkMyOwnLikes();
+    this._checkMyOwnLikes(this._obj);
     return this._item;
   }
 
@@ -52,16 +52,10 @@ export class Card {
   }
 
   _handleLike() {
-    if (this._checkLikesArray()) {
-      this._deleteLikeWithApi(this._obj).then(res => {
-        this._obj = res;
-        this._checkMyOwnLikes()
-      })
-    } if (!this._checkLikesArray()) {
-      this._putLikeWithApi(this._obj).then(res => {
-        this._obj = res;
-        this._checkMyOwnLikes()
-      })
+    if (this._likeButton.classList.contains('card__button_active')) {
+      this._deleteLikeWithApi(this._obj)
+    } else {
+      this._putLikeWithApi(this._obj);
     }
   }
 
@@ -78,8 +72,8 @@ export class Card {
     this._item = null;
   }
 
-  _checkMyOwnLikes() {
-    this._likesCount.textContent = this._obj.likes.length;
+  _checkMyOwnLikes(obj) {
+    this._likesCount.textContent = obj.likes.length;
     this._result = this._checkLikesArray();
     if (this._result) {
       this._sendLike();

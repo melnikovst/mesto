@@ -1,8 +1,11 @@
 import {
   author, job,
-  buttonOpenPopupProfileEdit, popupProfile, cardTemplateContainer,
-  cardEditor, cardPopupBtn,
-  popupsList, bigImgPopup, settings, formValidators, avatarImg, buttonOpenPopupAvatar, errorLoader
+  buttonOpenPopupProfileEdit,
+  cardPopupBtn,
+  popupsList, settings,
+  formValidators, avatarImg,
+  buttonOpenPopupAvatar, loading,
+  spinner, errorLoader
 } from "../utils/variables.js";
 import { FormValidator } from "../components/FormValidator.js";
 import { Card } from "../components/Card.js";
@@ -32,13 +35,19 @@ const enableValidation = (config) => {
   });
 };
 
-const popupAvatar = document.querySelector('.popup_type_avatar');
-
 const changeAvatar = (obj) => {
+  avatarImg.classList.add('profile__image_while_loading');
+  spinner.classList.add('spinner_visible');
+  avatarPopup.changeButtonState(true);
   return server.setNewAvatar(obj)
     .then(link => {
-      profileowner.setUserAvatar(link)
-    }).catch(err => { console.log(err) })
+      profileowner.setUserInfo(link);
+      avatarPopup.close();
+    }).catch(err => { console.log(err) }).finally(() => {
+      spinner.classList.remove('spinner_visible');
+      avatarImg.classList.remove('profile__image_while_loading');
+      avatarPopup.changeButtonState(false);
+    })
 }
 
 enableValidation(settings);
@@ -49,15 +58,20 @@ const handleCardClick = (name, link) => {
 
 const handleTrashImg = (object) => {
   deletePopup.open();
-  deletePopup.getCardObject(object);
+  deletePopup.setCardObject(object);
 }
 
-const popupDeleting = document.querySelector('.popup_type_submit');
-
 const editCardSubmitHandler = (obj) => {
+  addCardPopup.changeButtonState(true);
   return server.addCard(obj)
     .then(item => {
       renderCards.addItem(createCard(item));
+      addCardPopup.close();
+    }).catch(err => {
+      console.log(`Ошибка: ${err}`)
+    })
+    .finally(() => {
+      addCardPopup.changeButtonState(false);
     })
 };
 
@@ -66,11 +80,26 @@ const renderCards = new Section({
     const card = createCard(cardElement)
     renderCards.addItem(card);
   }
-}, cardTemplateContainer);
+}, '.cards');
+
+let user;
 
 const createCard = (cardElement) => {
-  const card = new Card(cardElement, '#card-template', handleCardClick, handleTrashImg, { userId: profileowner.getUserId() }, putLikeThroughApi,
-    deleteLikeThroughApi);
+  const card = new Card(cardElement, '#card-template', handleCardClick, handleTrashImg, {
+    userId: user,
+    putLike: () => {
+      return server.putLike(cardElement).then(res => {
+        card._checkMyOwnLikes(res);
+        card._sendLike();
+      })
+    },
+    deleteLike: () => {
+      return server.deleteLike(cardElement).then(res => {
+        card._checkMyOwnLikes(res);
+        card._deleteLike();
+      })
+    }
+  });
   const cardItem = card.generateCard();
   return cardItem;
 };
@@ -85,15 +114,18 @@ const preloadAnimationCanceling = () => {
 };
 
 const handleProfileFormSubmit = (obj) => {
+  profilePopup.changeButtonState(true);
   return server.changeProfile(obj)
     .then((res) => {
       profileowner.setUserInfo(res);
-    }).catch(err => console.log(err));
+      profilePopup.close();
+    }).catch(err => console.log(err)).finally(() => {
+      profilePopup.changeButtonState(false);
+    });
 };
 
 const openProfilePopup = () => {
   const obj = profileowner.getUserInfo();
-  profileowner.getUserInfo();
   profilePopup.setInputValues(obj);
   formValidators['profile-form'].resetValidation();
   formValidators['profile-form'].disableButton();
@@ -108,24 +140,20 @@ const handleAvatarOpening = () => {
 
 const deleteCardThroughApi = (object) => {
   server.deleteCard(object.sendCard())
-    .then(res => res.json())
     .then(() => { object.handeDeleting() });
 }
 
-const deleteLikeThroughApi = (object) => {
-  return server.deleteLike(object)
-}
+const profileowner = new UserInfo({
+  profileName: author,
+  profileDescription: job,
+  profileAvatar: avatarImg,
+})
 
-const putLikeThroughApi = (object) => {
-  return server.putLike(object)
-}
-
-let profileowner;
-const profilePopup = new PopupWithForm(popupProfile, handleProfileFormSubmit);
-const addCardPopup = new PopupWithForm(cardEditor, editCardSubmitHandler);
-const avatarPopup = new PopupWithForm(popupAvatar, changeAvatar)
-const imgPopup = new PopupWithImage(bigImgPopup);
-const deletePopup = new PopupWithSubmit(popupDeleting, deleteCardThroughApi);
+const profilePopup = new PopupWithForm('.popup_type_profile-info', handleProfileFormSubmit);
+const addCardPopup = new PopupWithForm('.popup_type_card-add', editCardSubmitHandler);
+const avatarPopup = new PopupWithForm('.popup_type_avatar', changeAvatar)
+const imgPopup = new PopupWithImage('.popup_type_picture');
+const deletePopup = new PopupWithSubmit('.popup_type_submit', deleteCardThroughApi);
 deletePopup.setListeners();
 
 imgPopup.setEventListeners();
@@ -137,15 +165,9 @@ cardPopupBtn.addEventListener('click', setCardListener);
 buttonOpenPopupProfileEdit.addEventListener('click', openProfilePopup);
 buttonOpenPopupAvatar.addEventListener('click', handleAvatarOpening);
 
-const loading = document.querySelector('.substrate')
-
 Promise.all([server.loadProfile(), server.loadCards()])
   .then((value) => {
-    profileowner = new UserInfo({
-      profileName: author,
-      profileDescription: job,
-      profileAvatar: avatarImg
-    }, value[0]);
+    user = value[0]._id;
     profileowner.setUserInfo(value[0]);
     renderCards.renderItems(value[1])
     loading.classList.remove('substrate_while_loading');
@@ -153,4 +175,3 @@ Promise.all([server.loadProfile(), server.loadCards()])
     loading.classList.remove('substate_while_loading')
     errorLoader.classList.add('substrate_active');
   })
-
